@@ -2,10 +2,112 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Galactus - JS Applications</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.amd.js"></script>
+
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="./bower_components/jquery/dist/jquery.js"></script>
+    <script src="./bower_components/handlebars/handlebars.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="./js/navigation_ui.js"></script>
 </head>
 <body>
+<header>
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".collapseNav" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">GALACTUS</a>
+            </div>
+            <form class="collapse navbar-collapse collapseNav navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username">
+                    <input type="text" class="form-control" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Log in</button>
+            </form>
+        </div>
+    </nav>
+</header>
+<main>
+    <nav id="dashboardNav" class="navbar navbar-default">
+        <div class="collapse navbar-collapse collapseNav">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Homeworks<span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <a href="#">Workshops</a>
+                </li>
+                <li>
+                    <a href="#">Exams</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <article id="mainContainer">
+        <div class="container">
+            <div class="row">
+                <ul id="lists">
+                    <li class="singleList">List One</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                    <li class="singleList">List Two</li>
+                </ul>
+            </div>
+        </div>
+    </article>
+</main>
+<footer>
+
+</footer>
+
 </body>
 </html>

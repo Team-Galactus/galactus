@@ -1,0 +1,40 @@
+/*GENERAL STYLES*/
+#mainContainer {
+    margin: 55px 0 0 15%;
+}
+/*GENERAL STYLES END*/
+
+/*MAIN NAV STYLES*/
+#mainNav {
+    margin: 0;
+    height: 55px;
+}
+/*MAIN NAV STYLES END*/
+
+/*DASHBOARD STYLES*/
+#dashboardNav {
+    width: 15%;
+    margin: 0;
+    height: 100vh;
+    border-top: 0;
+    border-radius: 0;
+    position: fixed;
+    left: 0;
+    top:55px;
+}
+#dashboardNav .navbar-collapse {
+    padding: 0;
+}
+#dashboardNav .nav {
+    width: 100%;
+}
+#dashboardNav li {
+    float: none;
+}
+/*DASHBOARD STYLES END*/
+
+/*LIST STYLES*/
+/*LIST STYLES END*/
+
+/*TASK STYLES*/
+/*TASK STYLES END*/

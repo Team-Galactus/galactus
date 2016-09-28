@@ -1,0 +1,22 @@
+{
+  "name": "Galactus",
+  "homepage": "https://github.com/angelinamarkova/galactus",
+  "authors": [
+    "Angelina <angelina@quikfox.com>"
+  ],
+  "description": "All UI packages required for the project",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "handlebars": "^4.0.5"
+  }
+}

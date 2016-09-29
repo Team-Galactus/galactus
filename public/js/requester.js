@@ -1,5 +1,16 @@
 ﻿
 let requester = {
+    get(url) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url,
+                method: "GET",
+                success(response) {
+                    resolve(response);
+                }
+            });
+        });
+    },
     getJSON(url) {
         return new Promise((resolve, reject) => {
             $.ajax({

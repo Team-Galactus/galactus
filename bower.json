@@ -1,6 +1,6 @@
 {
   "name": "Galactus",
-  "homepage": "https://github.com/angelinamarkova/galactus",
+  "homepage": "https://github.com/Team-Galactus/galactus",
   "authors": [
     "Angelina <angelina.markova3@gmail.com>"
   ],
@@ -17,6 +17,8 @@
   "dependencies": {
     "jquery": "^3.1.1",
     "bootstrap": "^3.3.7",
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "navigo": "^3.0.0",
+    "toastr": "^2.1.3"
   }
 }

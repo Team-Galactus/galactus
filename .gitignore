@@ -1,0 +1,5 @@
+
+# Ignore directories
+
+bower_components/
+node_modules/

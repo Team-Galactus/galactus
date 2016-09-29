@@ -8,15 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angelinamarkova/galactus.git"
+    "url": "git+https://github.com/Team-Galactus/galactus.git"
   },
-  "author": "",
+  "author": "Angelina <angelina@quikfox.com>",
   "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
   "bugs": {
-    "url": "https://github.com/angelinamarkova/galactus/issues"
+    "url": "https://github.com/Team-Galactus/galactus/issues"
   },
-  "homepage": "https://github.com/angelinamarkova/galactus#readme",
+  "homepage": "https://github.com/Team-Galactus/galactus#readme",
   "dependencies": {
-    "handlebars": "^4.0.5"
   }
 }

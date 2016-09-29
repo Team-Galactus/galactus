@@ -35,6 +35,7 @@ var validator = (function () {
 } ());
 
 /*function generator*/
+
 function* idGenerator() {
     var id = 1;
     while (true) {

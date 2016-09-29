@@ -4,11 +4,13 @@ let router = new Navigo(null, true);
 let controllersInstance = controllers.get(dataService, templates);
 
 router
-    .on("login", controllersInstance.login)
-    .on("home", controllersInstance.home)
-    .on("homeworks", controllersInstance.homeworks)
-    .on("workshops", controllersInstance.workshops)
-    .on("exams", controllersInstance.exams)
+    .on({ // the order of the added routes using this method does not matter anymore
+        "login": controllersInstance.login,
+        "home": controllersInstance.home,
+        "homeworks": controllersInstance.homeworks,
+        "workshops": controllersInstance.workshops,
+        "exams": controllersInstance.exams
+    })
     .resolve(); // Very Important !!!
 
 //toggle navigation link active class

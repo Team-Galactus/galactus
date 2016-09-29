@@ -51,7 +51,7 @@ $(document).ready(() => {
         newList.description = listDescription;
 
         $listHolder.append('<li class="singleList">' +
-                '<h3> ' + newList.title + '</h3>' +
+                '<h3><a href=""> ' + newList.title + '</a></h3>' +
                 '<p class="listDescription">' + newList.description + '</p>' +
             '</li>');
     });

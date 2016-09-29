@@ -48,16 +48,46 @@
                     </li>
                 </ul>
             </div>
-            <button class="addItemBtn addDashboard" data-toggle="modal" data-target="#addDashboardModal">+ Add Dashboard</button>
+            <button class="addItemBtn" data-toggle="modal" data-target="#addDashboardModal">+ Add Dashboard</button>
         </nav>
         <article id="mainContainer" class="clearfix">
-            <ul id="lists" class="clearfix">
-                <li class="singleList">
-                    <h3>List One</h3>
-                    <p class="listDescription">Some description</p>
-                </li>
-            </ul>
-            <button class="addItemBtn addList" data-toggle="modal" data-target="#addListModal">+ Add List</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <section id="listsHolder">
+                            <ul id="lists" class="clearfix">
+                                <li class="singleList">
+                                    <h3>
+                                        <a href="">List One</a>
+                                    </h3>
+                                    <p class="listDescription">Some description</p>
+                                </li>
+                            </ul>
+                            <button class="addItemBtn" data-toggle="modal" data-target="#addListModal">+ Add List</button>
+                        </section>
+                    </div>
+                    <div class="col-sm-8">
+                        <section id="listPreview" class="closed">
+                            <header>
+                                <h3>Some List Title</h3>
+                                <p class="listDescription">Some list description</p>
+                            </header>
+                            <article id="tasksHolder">
+                                <ul id="taskList">
+                                    <li class="singleTask">
+                                        <h4>
+                                            <a href="#">Task title</a>
+                                        </h4>
+                                        <p class="listDescription"> Some task description</p>
+                                        <div class="deadline">3/10/2016</div>
+                                    </li>
+                                </ul>
+                                <button class="addItemBtn" data-toggle="modal" data-target="#addTaskModal">+ Add Task</button>
+                            </article>
+                        </section>
+                    </div>
+                </div>
+            </div>
         </article>
     </main>
     <footer></footer>
@@ -125,6 +155,40 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <input id="addList" type="submit" class="btn btn-primary" data-dismiss="modal" value="Add List">
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--Add Task Modal-->
+    <div id="addTaskModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add New Task</h4>
+                </div>
+                <form method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label for="taskTitle">List Title</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input id="taskTitle" class="form-control marginBottom20px" type="text" placeholder="Insert task title"/>
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="taskDescription">List Description</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea id="taskDescription" class="form-control marginBottom20px" placeholder="Type in task description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input id="addTask" type="submit" class="btn btn-primary" data-dismiss="modal" value="Add Task">
                     </div>
                 </form>
             </div><!-- /.modal-content -->

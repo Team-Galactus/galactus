@@ -21,8 +21,9 @@ let controllers = {
                     })
                     .then((templateHtml) => {
                         let templateFunc = handlebars.compile(templateHtml);
+                        console.log(homeworks);
                         let html = templateFunc({ homeworks });
-                        $("#container").html(html);
+                        $("#dashboardNav").html(html);
                     });
             },
 

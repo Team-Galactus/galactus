@@ -1,4 +1,7 @@
 ﻿
+let apiKey = "h2dqg9q03f6uig78";
+let evLive = new Everlive(apiKey);
+
 let router = new Navigo(null, true);
 
 let controllersInstance = controllers.get(dataService, templates);

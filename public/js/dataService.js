@@ -1,25 +1,12 @@
 ﻿
-let homeworks = 
-    [{
-        id: 1,
-        course: "JS-App",
-        deadline: "04.10.2016"
-    },
-    {
-        id: 2,
-        course: "HQC-2",
-        deadline: "07.10.2016"
-    }];
-
-
 var dataService = {
     homeworks() {
+        let homeworksData = evLive.data("Homeworks");
+        let query = new Everlive.Query();
+        let homeworksQuery = query.select("course", "deadline");
 
-        // this is a temporarily hack
-        return Promise.resolve()
-            .then(() => {
-                return { homeworks };
-            }); 
+        return homeworksData.get(homeworksQuery);
+
         //return requester.getJSON("/api/homeworks");
     }
 };

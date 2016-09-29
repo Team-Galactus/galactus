@@ -12,17 +12,9 @@ let controllers = {
 
             },
 
-            homeworks() {
+            dashboards() {
 
             },
-
-            workshops() {
-
-            },
-
-            exams() {
-
-            }
         }
     }
 };

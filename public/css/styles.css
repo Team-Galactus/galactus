@@ -1,8 +1,27 @@
 /*GENERAL STYLES*/
-#mainContainer {
-    margin: 55px 0 0 15%;
+.clearfix:after {
+    content: "";
+    display: block;
+    float: none;
+}
+.marginBottom20px{
+    margin-bottom: 20px;
+}
+.addItemBtn {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    margin:10px;
 }
 /*GENERAL STYLES END*/
+
+
+/*MAIN STYLES*/
+#mainContainer {
+    margin: 55px 0 0 225px;
+}
+/*MAIN STYLES END*/
+
 
 /*MAIN NAV STYLES*/
 #mainNav {
@@ -13,7 +32,7 @@
 
 /*DASHBOARD STYLES*/
 #dashboardNav {
-    width: 15%;
+    width: 225px;
     margin: 0;
     height: 100vh;
     border-top: 0;
@@ -31,9 +50,42 @@
 #dashboardNav li {
     float: none;
 }
+#dashboardList h2 {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    margin: 0;
+}
+.subTitle {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+}
+.addDashboard {
+    float: right;
+}
 /*DASHBOARD STYLES END*/
 
 /*LIST STYLES*/
+.singleList {
+    list-style: none;
+    width: 200px;
+    background: #e7e7e7;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+.singleList h3 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+.listDescription {
+    border-bottom: 1px solid #bfbfbf;
+    padding-bottom: 15px;
+}
+.addList{
+    float:left;
+}
 /*LIST STYLES END*/
 
 /*TASK STYLES*/

@@ -95,7 +95,7 @@ class DashBoard extends Item {
         super(obj.title);
         this.id = dashBoardIdGenerator.next().value;
         this.description = obj.description;
-        this.lists[] = null;
+        this._lists = [];
     }
     get description() {
         return this._description;
@@ -146,7 +146,7 @@ class List extends Item {
         super(obj.title);
         this.id = listIdGenerator.next().value;
         this.description = obj.description;
-        this.tasks[] = null;
+        this._tasks =[];
     }
     get description() {
         return this._description;
@@ -197,8 +197,8 @@ class Task extends Item {
         this.id = taskIdGenerator.next().value;
         this.description = obj.description;
         this.deadline = obj.deadline;
-        this.checkList[] = null;
-        this.taskSolvedInPercenteges = 0;
+        this._checkList = [];
+        this.TaskSolvedInPercenteges = 0;
     }
 
     get description() {

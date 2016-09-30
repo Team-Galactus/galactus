@@ -1,0 +1,11 @@
+<ul id="lists" class="clearfix">
+    {{#each lists}}
+        <li class="singleList">
+            <h3>
+                <a href="#/dashboard/{{../Id}}/lists/{{Id}}">{{title}}</a>
+            </h3>
+            <p class="listDescription">{{description}}</p>
+        </li>
+    {{/each}}
+</ul>
+<a class="addItemBtn" data-toggle="modal" data-target="#addListModal">+ Add List</a>

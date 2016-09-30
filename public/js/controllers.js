@@ -26,6 +26,20 @@ let controllers = {
                     $('#dashboardNav').html(html);
                     console.log("Dashboard results: ", data);
                 })
+            },
+
+            dashboardLists(id) {
+                Promise.all([
+                    dataService.dashboardLists(id),
+                    templates.get('list')
+                ])
+                    .then(([data, template]) => {
+
+                        let compiledTemplate = Handlebars.compile(template),
+                            html = compiledTemplate(data.result[0]);
+                        $('#listsHolder').html(html);
+                        console.log("List results: ", data, html, $('#listsHolder'));
+                    })
             }
         }
     }

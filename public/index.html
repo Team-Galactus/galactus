@@ -50,44 +50,68 @@
                     </li>
                 </ul>
             </div>
-            <button class="addItemBtn" data-toggle="modal" data-target="#addDashboardModal">+ Add Dashboard</button>
+            <a class="addItemBtn" data-toggle="modal" data-target="#addDashboardModal">+ Add Dashboard</a>
         </nav>
         <article id="mainContainer" class="clearfix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <section id="listsHolder">
-                            <ul id="lists" class="clearfix">
-                                <li class="singleList">
-                                    <h3>
-                                        <a href="#/List">List One</a>
-                                    </h3>
-                                    <p class="listDescription">Some description</p>
-                                </li>
-                            </ul>
-                            <button class="addItemBtn" data-toggle="modal" data-target="#addListModal">+ Add List</button>
-                        </section>
-                    </div>
-                    <div class="col-sm-8">
-                        <section id="listPreview" class="closed">
-                            <header>
-                                <h3>Some List Title</h3>
-                                <p class="listDescription">Some list description</p>
-                            </header>
-                            <article id="tasksHolder">
-                                <ul id="taskList">
-                                    <li class="singleTask">
-                                        <h4>
-                                            <a href="#">Task title</a>
-                                        </h4>
-                                        <p class="listDescription"> Some task description</p>
-                                        <div class="deadline">3/10/2016</div>
-                                    </li>
-                                </ul>
-                                <button class="addItemBtn" data-toggle="modal" data-target="#addTaskModal">+ Add Task</button>
-                            </article>
-                        </section>
-                    </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <section id="listsHolder">
+                        <ul id="lists" class="clearfix">
+                            <li class="singleList">
+                                <h3>
+                                    <a href="#/List">List One</a>
+                                </h3>
+                                <p class="listDescription">Some description</p>
+                            </li>
+                        </ul>
+                        <a class="addItemBtn" data-toggle="modal" data-target="#addListModal">+ Add List</a>
+                    </section>
+                </div>
+                <div class="col-sm-8">
+                    <section id="listPreview" class="closed clearfix">
+                        <header>
+                            <h3>Some List Title</h3>
+                            <p class="listDescription">Some list description</p>
+                        </header>
+                        <article id="tasksHolder">
+
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="heading">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#task" aria-expanded="true" aria-controls="task">
+                                            <h4 class="panel-title">Task 1 #1</h4>
+                                            <div class="deadline">
+                                                <span><em>Due Date: </em></span><strong>3/10/2016</strong>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="task" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <p> Some task description</p>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="checklists clearfix">
+                                                        <div class="checklist">
+                                                            <h5>Some Checklist</h5>
+                                                            <form class="checklistForm">
+                                                                <div class="singleCheck">
+                                                                    <input type="checkbox" value="completed">
+                                                                    <label>Checkbox 1 </label>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="addItemBtn" data-toggle="modal" data-target="#addTaskModal">+ Add Task</a>
+                        </article>
+                    </section>
                 </div>
             </div>
         </article>
@@ -172,23 +196,66 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
                     <h4 class="modal-title">Add New Task</h4>
                 </div>
                 <form method="post">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <label for="taskTitle">List Title</label>
+                            <div class="col-sm-6">
+                                <label for="taskTitle">Task Title</label>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <label for="taskDeadline">Task Deadline</label>
+                            </div>
+                            <div class="col-sm-6">
                                 <input id="taskTitle" class="form-control marginBottom20px" type="text" placeholder="Insert task title" />
                             </div>
+                            <div class="col-sm-6">
+                                <input type="date" id="taskDeadline" class="form-control"/>
+                            </div>
                             <div class="col-sm-12">
-                                <label for="taskDescription">List Description</label>
+                                <label for="taskDescription">Task Description</label>
                             </div>
                             <div class="col-sm-12">
                                 <textarea id="taskDescription" class="form-control marginBottom20px" placeholder="Type in task description"></textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="checklists clearfix">
+                                    <div class="checklist">
+                                        <h5>Some Checklist</h5>
+                                        <form class="checklistForm">
+                                            <div class="singleCheck">
+                                                <input type="checkbox" value="completed">
+                                                <label>Checkbox 1 </label>
+                                            </div>
+                                        </form>
+                                        <div class="collapse" id="addCheckboxHolder">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <input id="checkboxTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checkbox">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <a id="addNewCheckbox" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder">Add</a>
+                                                    <a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder"><span aria-hidden="true">&times;</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="false" aria-controls="addCheckboxHolder">+ Add Checkbox</a>
+                                    </div>
+                                    <div class="collapse singleTask" id="addCheckListHolder">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <input id="checkListTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checklist">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <a id="addNewChecklist" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder">Add</a>
+                                                <a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder"><span aria-hidden="true">&times;</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="false" aria-controls="addCheckListHolder">+ Add Checklist</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -228,6 +295,7 @@
 
     <script src=".././node_modules/systemjs/dist/system.js"></sсript>
     <sсript src=".././js/system-config.js"></sсript>
+
     /*<sсript>
     System.import('app');
     </sсript>*/

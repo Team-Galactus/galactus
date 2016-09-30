@@ -16,6 +16,11 @@ router
 
 
 $(document).ready(() => {
+
+    $('.date').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+
     //toggle navigation link active class
     $('#dashboardNav').on('click', "li", (event) => {
         $("#dashboardNav li.active").removeClass("active");

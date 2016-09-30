@@ -11,18 +11,20 @@ var dataService = {
     
     dashboards() {
         let dashboardsData = everliveApp.data("Dashboard");
-        //let query = new Everlive.Query();
-        //let dashboardQuery = query.select("title", "description");
+        let expandExpression = {
+            "lists": {
+                "TargetTypeName" : "List"
+            }
+        };
+        let query = new Everlive.Query();
+        let dashboardQuery = query.select();
 
-        //
-        //var dasboardData = evLive.data("DashBoard");
-        //let query2 = new Everlive.Query();
-        var result = dasboardData.get(null);
-        console.log(JSON.stringify(result));
-        //console.log(JSON.parse(result));
-        //
+        var result = dashboardsData.expand(expandExpression).get(dashboardQuery)
+        .then((data) => {
+            return data;
+        });
+        return result;
 
-       // return homeworksData.get(homeworksQuery);
 
         //return requester.getJSON("/api/homeworks");
     }

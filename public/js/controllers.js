@@ -1,4 +1,5 @@
-﻿
+﻿//import { templateLoader } from './templates'
+
 var handlebars = handlebars || Handlebars;
 
 let controllers = {
@@ -13,21 +14,18 @@ let controllers = {
             },
 
             dashboard() {
-                let dashboards;
-                dataService.dashboards.get()
-                    .then((dataService)=>{
-                        console.log(data)
-                    })
-                    
-                   
-            },
+                Promise.all([
+                    dataService.dashboards(),
+                    templates.get('dashboardNav')
+                ])
+                .then(([data, template]) => {
 
-            workshops() {
+                    let compiledTemplate = Handlebars.compile(template),
+                        html = compiledTemplate(data.result);
 
-            },
-
-            exams() {
-
+                    $('#dashboardNav').html(html);
+                    console.log("Dashboard results: ", data);
+                })
             }
         }
     }

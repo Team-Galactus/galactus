@@ -92,7 +92,7 @@ var dashBoardIdGenerator = idGenerator();
 
 class DashBoard extends Item {
     constructor(obj) {
-        super(obj.title, obj.description);
+        super(obj.title);
         this.id = dashBoardIdGenerator.next().value;
         this.description = obj.description;
         this.lists[] = null;
@@ -198,7 +198,7 @@ class Task extends Item {
         this.description = obj.description;
         this.deadline = obj.deadline;
         this.checkList[] = null;
-        this.TaskSolvedInPercenteges = 0;
+        this.taskSolvedInPercenteges = 0;
     }
 
     get description() {

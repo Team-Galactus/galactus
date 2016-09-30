@@ -10,7 +10,7 @@ router
     .on({ // the order of the added routes using this method does not matter anymore
         "login": controllersInstance.login,
         "home": controllersInstance.home,
-        "dashboard": controllersInstance.homeworks
+        "dashboard": controllersInstance.dashboard
     })
     .resolve(); // Very Important !!!
 

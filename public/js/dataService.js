@@ -1,12 +1,6 @@
 ﻿
 var everliveApp = new Everlive('h2dqg9q03f6uig78');
 
-var expandExp = {
-  "Likes" : {
-    "TargetTypeName" : "Users"
-    }
-};
-
 var dataService = {
     
     dashboards() {
@@ -28,9 +22,11 @@ var dataService = {
         };
         let query = new Everlive.Query();
         let dashboardQuery = query.take(id);
+        let dashboardQuery1 = query.select("title", "description");
 
         var result = dashboardsData.expand(expandExpression).get(dashboardQuery)
             .then((data) => {
+                console.log("data", data);
                 return data;
             });
         return result;

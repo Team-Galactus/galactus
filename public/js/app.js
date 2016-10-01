@@ -12,6 +12,7 @@ router
         "home": controllersInstance.home,
         "dashboard": controllersInstance.dashboard,
         "dashboard/:id": controllersInstance.dashboardLists
+        //"dashboard/:id/lists/:id":
     })
     .resolve(); // Very Important !!!
 

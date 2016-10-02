@@ -54,6 +54,7 @@ var dataService = {
             });
     },
 
+
     addDashboard(dashboard) {
         const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
         const modifiedDashboard = {
@@ -68,11 +69,30 @@ var dataService = {
         return requester
             .postJSON(`https://api.everlive.com/v1/${appID}/DashBoard`, modifiedDashboard, options)
             .then((response) => {
-                console.log("1");
                 return Promise.resolve();
             })
             .catch((error) => {
-                console.log("2");
+                return Promise.reject();
+            });
+    },
+
+    addList(list) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const modifiedList = {
+            //id: `${list.id}`,
+            title: list.title,
+            description: list.description
+            //tasks: list.tasks
+        };
+
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        return requester
+            .postJSON(`https://api.everlive.com/v1/${appID}/List`, modifiedList, options)
+            .then((response) => {
+                return Promise.resolve(response.Result);
+            })
+            .catch((error) => {
                 return Promise.reject();
             });
     },
@@ -91,15 +111,18 @@ var dataService = {
            });
     },
 
+
+
     dashboardLists(id) {
-        console.log();
         const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
-        const options = { headers: {
-            "Authorization": `Bearer ${accessToken}` },
-            "X-Everlive-Expand": {
-                "lists": {
-                    "TargetTypeName" : "List"
-                }
+        const options = {
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "X-Everlive-Expand": JSON.stringify({
+                    "lists": {
+                        "TargetTypeName" : "List"
+                     }
+                })
             }
         };
 
@@ -110,6 +133,33 @@ var dataService = {
             })
             .catch((error) => {
                 return null;
+            });
+    },
+
+    updateDashboard(dashboardId, listId ) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        return this.dashboardLists(dashboardId)
+            .then((response)=>{
+                let dashboardListIds = response.Result.lists.map((list) => list.Id);
+                dashboardListIds.push(listId);
+
+                let updatedDashboard = {
+                    "lists": dashboardListIds
+                };
+
+                return requester
+                    .putJSON(`https://api.everlive.com/v1/${appID}/DashBoard/${dashboardId.id}`, updatedDashboard, options)
+                    .then((response) => {
+                        return response;
+                    })
+                    .catch((error) => {
+                        return null;
+                    });
+            })
+            .then(() => {
+                return Promise.resolve();
             });
     }
 };

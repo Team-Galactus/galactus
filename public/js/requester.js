@@ -18,7 +18,6 @@ let requester = {
         options = options || {};
         return new Promise((resolve, reject) => {
             let headers = options.headers || {};
-            console.log(headers);
             $.ajax({
                 url,
                 headers,

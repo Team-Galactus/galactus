@@ -93,13 +93,13 @@ let controllers = {
             },
 
             dashboardLists(id) {
+                console.log("Lists",id);
                 Promise.all([
                     dataService.dashboardLists(id),
                     templates.get('main'),
                     templates.get('list')
                 ])
                 .then(([data, mainTemplate, listsTemplate]) => {
-
                     let mainCompiledTemplate = Handlebars.compile(mainTemplate),
                         listsCompiledTemplate = Handlebars.compile(listsTemplate),
                         mainHtml = mainCompiledTemplate(),

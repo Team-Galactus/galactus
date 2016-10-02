@@ -100,17 +100,30 @@ $(document).ready(() => {
     $('#addList').click((event) => {
         event.preventDefault();
         let newList = {},
-            $listHolder = $('#lists'),
             listTitle = $('#listTitle').val(),
             listDescription = $('#listDescription').val();
 
         newList.title = listTitle;
         newList.description = listDescription;
 
-        $listHolder.append('<li class="singleList">' +
-                '<h3><a href=""> ' + newList.title + '</a></h3>' +
-                '<p class="listDescription">' + newList.description + '</p>' +
-            '</li>');
+        let list = new List(newList);
+        let dashboardId ={
+            "id": window.location.hash.split('/')[2]
+        };
+
+        dataService
+            .addList(list)
+            .then((response) => {
+                dataService.updateDashboard(dashboardId, response.Id)
+                .then(() => {
+                    console.log("hoho");
+                    controllersInstance.dashboardLists(dashboardId);
+                });
+            })
+            .catch(() => {
+                toastr.error('List not successfully added!');
+            });
+
     });
 
 });

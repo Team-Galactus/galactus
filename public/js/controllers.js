@@ -60,7 +60,12 @@ let controllers = {
             },
 
             home() {
-
+                templates.get('welcome')
+                .then((template) => {
+                    let compiledTemplate = Handlebars.compile(template),
+                        html = compiledTemplate();
+                    $('#main').html(html);
+                });
             },
 
             dashboard() {
@@ -92,6 +97,5 @@ let controllers = {
                 });
             }
         }
-        //});
     }
 };

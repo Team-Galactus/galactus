@@ -55,6 +55,8 @@ h2, h3, h4{
 #main{
     margin-top:55px;
     height: 100vh;
+}
+.welcomeHolder{
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -64,6 +66,7 @@ h2, h3, h4{
     /* align-items: center; */
     justify-content: center;
     flex-wrap: wrap;
+    height: 100vh;
 }
 .welcomeHolder h1 {
     font-size: 4em;
@@ -76,8 +79,7 @@ h2, h3, h4{
     text-align:center;
 }
 #mainContainer {
-    width: 100%;
-    margin: 0px 0 0 225px;
+    margin: 55px 0 0 225px;
     padding:20px
 }
 .btn {
@@ -168,8 +170,9 @@ a.navbar-brand {
 
 /*LIST STYLES*/
 #listPreview {
-    background: #e7e7e7;
+    background: rgba(255,255,255,0.55);
     padding: 15px;
+    border-radius: 10px;
 }
 .singleList {
     list-style: none;
@@ -192,8 +195,11 @@ a.navbar-brand {
 #listPreview h3 {
     margin: 0;
 }
-.singleTask,
-.checklist {
+.taskPreview {
+    box-shadow: 1px 3px 9px -1px rgba(0, 0, 0, 0.64)!important;
+    background: rgba(255,255,255,0.55)!important;
+}
+.singleTask {
     padding: 5px 10px;
     border-radius: 10px;
     position: relative;

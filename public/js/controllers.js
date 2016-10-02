@@ -103,11 +103,11 @@ let controllers = {
                     let mainCompiledTemplate = Handlebars.compile(mainTemplate),
                         listsCompiledTemplate = Handlebars.compile(listsTemplate),
                         mainHtml = mainCompiledTemplate(),
-                        listsHtml = listsCompiledTemplate(data.result[0]);
+                        listsHtml = listsCompiledTemplate(data.Result);
 
                     $('#main').html(mainHtml);
                     $('#listsHolder').html(listsHtml);
-                    console.log("List results: ", data);
+                    console.log("List results: ", data.Result);
                 });
             }
         }

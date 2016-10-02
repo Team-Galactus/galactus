@@ -141,6 +141,9 @@ a.navbar-brand {
 #dashboardNav .nav {
     width: 100%;
 }
+#dashboardNav li {
+    float:none;
+}
 #dashboardNav li:hover,
 #dashboardNav li.active
 {

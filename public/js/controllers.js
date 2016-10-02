@@ -32,6 +32,8 @@ let controllers = {
                                     router.navigate("/dashboard");
                                     return true;
                                 }
+
+                                toastr.error('Invalid user or password!');
                                 return false;
                             });
                     });

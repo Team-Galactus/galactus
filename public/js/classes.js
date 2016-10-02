@@ -196,8 +196,8 @@ class Task extends ExtendedItem {
     set deadline(value) {
         this._deadline = deadline;
     }
-    get checkBox() {
-        return this._checkBox;
+    get checkList() {
+        return this._checkList;
     }
     get isTaskSolved() {
         return this._isTaskSolved;

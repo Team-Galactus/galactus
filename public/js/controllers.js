@@ -32,6 +32,8 @@ let controllers = {
                                     router.navigate("/dashboard");
                                     return true;
                                 }
+
+                                toastr.error('Invalid user or password!');
                                 return false;
                             });
                     });
@@ -58,20 +60,30 @@ let controllers = {
             },
 
             home() {
-
+                templates.get('welcome')
+                .then((template) => {
+                    let compiledTemplate = Handlebars.compile(template),
+                        html = compiledTemplate();
+                    $('#main').html(html);
+                });
             },
 
             dashboard() {
                 Promise.all([
                     dataService.dashboards(),
+                    templates.get('main'),
                     templates.get('dashboardNav')
                 ])
-                .then(([data, template]) => {
+                .then(([data, mainTemplate, dashboardNavTemplate]) => {
 
-                    let compiledTemplate = Handlebars.compile(template),
-                        html = compiledTemplate(data.result);
+                    let mainCompiledTemplate = Handlebars.compile(mainTemplate),
+                        dashboardCompiledTemplate = Handlebars.compile(dashboardNavTemplate),
+                        mainHtml = mainCompiledTemplate(),
+                        dashboardHtml = dashboardCompiledTemplate(data.result);
 
-                    $('#dashboardNav').html(html);
+                    $('#main').html(mainHtml);
+                    $('#dashboardNav').html(dashboardHtml);
+
                     console.log("Dashboard results: ", data);
                 });
             },
@@ -79,17 +91,21 @@ let controllers = {
             dashboardLists(id) {
                 Promise.all([
                     dataService.dashboardLists(id),
+                    templates.get('main'),
                     templates.get('list')
                 ])
-                .then(([data, template]) => {
+                .then(([data, mainTemplate, listsTemplate]) => {
 
-                    let compiledTemplate = Handlebars.compile(template),
-                        html = compiledTemplate(data.result[0]);
-                    $('#listsHolder').html(html);
-                    console.log("List results: ", data, html, $('#listsHolder'));
+                    let mainCompiledTemplate = Handlebars.compile(mainTemplate),
+                        listsCompiledTemplate = Handlebars.compile(listsTemplate),
+                        mainHtml = mainCompiledTemplate(),
+                        listsHtml = listsCompiledTemplate(data.result[0]);
+
+                    $('#main').html(mainHtml);
+                    $('#listsHolder').html(listsHtml);
+                    console.log("List results: ", data);
                 });
             }
         }
-        //});
     }
 };

@@ -1,5 +1,5 @@
 ﻿
-var appID = "h2dqg9q03f6uig78";
+var appID = "r6hpe5hoscwytyr2";
 var everliveApp = new Everlive(appID);
 
 var dataService = {
@@ -41,8 +41,7 @@ var dataService = {
                 });
         }
 
-        const user = JSON.parse(localStorage.getItem("user"));
-        const accessToken = user.access_token;
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
         const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
         
         return requester
@@ -55,18 +54,26 @@ var dataService = {
             });
     },
 
-    dashboards() {
-        let dashboardsData = everliveApp.data("Dashboard");
+    addDashboard(dashboard) {
+        
+    },
 
-        var result = dashboardsData.get()
-        .then((data) => {
-            return data;
-        });
-        return result;
+    dashboards() {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        return requester
+           .getJSON(`https://api.everlive.com/v1/${appID}/DashBoard`, options)
+           .then((response) => {
+                return response;
+            })
+           .catch((error) => {
+               return null;
+           });
     },
 
     dashboardLists(id) {
-        let dashboardsData = everliveApp.data("Dashboard");
+        let dashboardsData = everliveApp.data("DashBoard");
         let expandExpression = {
             "lists": {
                 "TargetTypeName": "List"

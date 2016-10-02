@@ -7,18 +7,28 @@ let requester = {
                 method: "GET",
                 success(response) {
                     resolve(response);
+                },
+                error(err) {
+                    reject(err);
                 }
             });
         });
     },
-    getJSON(url) {
+    getJSON(url, options) {
+        options = options || {};
         return new Promise((resolve, reject) => {
+            let headers = options.headers || {};
+            console.log(headers);
             $.ajax({
                 url,
+                headers,
                 method: "GET",
                 contentType: "application/json",
                 success(response) {
                     resolve(response);
+                },
+                error(err) {
+                    reject(err);
                 }
             });
         });
@@ -36,6 +46,9 @@ let requester = {
                 data: JSON.stringify(body),
                 success(response) {
                     resolve(response);
+                },
+                error(err) {
+                    reject(err);
                 }
             });
         });
@@ -53,6 +66,9 @@ let requester = {
                 data: JSON.stringify(body),
                 success(response) {
                     resolve(response);
+                },
+                error(err) {
+                    reject(err);
                 }
             });
         });

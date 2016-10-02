@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head lang="en">
     <meta charset="UTF-8">
@@ -14,6 +14,7 @@
     <!-- Production Links (CDN) -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Righteous" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +28,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#/home">GALACTUS</a>
+                    <a class="navbar-brand heading white-font" href="#/home">GALACTUS</a>
                 </div>
                 <form class="collapse navbar-collapse collapseNav navbar-form navbar-right">
                     <div class="form-group">
@@ -41,65 +42,8 @@
             </div>
         </nav>
     </header>
-    <main>
-        <nav id="dashboardNav" class="navbar navbar-default">
+    <main id="main">
 
-        </nav>
-        <article id="mainContainer" class="clearfix">
-            <div class="row">
-                <div class="col-sm-4">
-                    <section id="listsHolder">
-
-                    </section>
-                </div>
-                <div class="col-sm-8">
-                    <section id="listPreview" class="closed clearfix">
-                        <header>
-                            <h3>Some List Title</h3>
-                            <p class="listDescription">Some list description</p>
-                        </header>
-                        <article id="tasksHolder">
-
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="heading">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#task" aria-expanded="true" aria-controls="task">
-                                            <h4 class="panel-title">Task 1 #1</h4>
-                                            <div class="deadline">
-                                                <span><em>Due Date: </em></span><strong>3/10/2016</strong>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div id="task" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <p> Some task description</p>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="checklists clearfix">
-                                                        <div class="checklist">
-                                                            <h5>Some Checklist</h5>
-                                                            <form class="checklistForm">
-                                                                <div class="singleCheck">
-                                                                    <input type="checkbox" value="completed">
-                                                                    <label>Checkbox 1 </label>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="addItemBtn" data-toggle="modal" data-target="#addTaskModal">+ Add Task</a>
-                        </article>
-                    </section>
-                </div>
-            </div>
-        </article>
     </main>
     <footer></footer>
 

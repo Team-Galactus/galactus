@@ -45,37 +45,26 @@ function* idGenerator() {
 
 /*constants*/
 const LENGTHS_OF_STRINGS = {
-    MIN_TITLE_LENGTH=2,
-    MAX_TITLE_LENGTH=20,
-    MIN_DASHBOARD_DESCRIPTION_LENGTH=5,
-    MAX_DASHBOARD_DESCRIPTION_LENGTH=2,
-    MIN_LIST_DESCRIPTION_LENGTH=5,
-    MAX_LIST_DESCRIPTION_LENGTH=30,
-    MIN_TASK_DESCRIPTION_LENGTH=5,
-    MAX_TASK_DESCRIPTION_LENGTH=90,
-    MIN_USERNAME_LENGTH=3,
-    MAX_USERNAME_LENGTH=15
+    MIN_TITLE_LENGTH: 2,
+    MAX_TITLE_LENGTH: 20,
+    MIN_EXTENDEDITEM_DESCRIPTION_LENGTH: 5,
+    MAX_EXTENDEDITEM_DESCRIPTION_LENGTH: 100,    
+    MIN_USERNAME_LENGTH: 3,
+    MAX_USERNAME_LENGTH: 15
 }
 
 const ERROR_MESSAGES = {
-    WRONG_LIST_ID='There is not a list with such id in this dashboard.',
-    WRONG_TASK_ID='There is not a task with such id in this list of tasks.',
-    WRONG_USERNAME='The username should content only characters.'
+    WRONG_LIST_ID:'There is not a list with such id in this dashboard.',
+    WRONG_TASK_ID:'There is not a task with such id in this list of tasks.',
+    WRONG_USERNAME:'The username should content only characters.'
 }
 
 
 /*classes*/
 
 class Item {
-    constructor(obj) {
-        this.id = 0;
+    constructor(obj) {     
         this.title = obj.title;
-    }
-    get id() {
-        return this._id;
-    }
-    set id(value) {
-        this._id = value;
     }
     get title() {
         return this._title;
@@ -87,15 +76,10 @@ class Item {
         this._title = value;
     }
 }
-
-var dashBoardIdGenerator = idGenerator();
-
-class DashBoard extends Item {
-    constructor(obj) {
+class ExtendedItem extends Item{
+    constructor(obj){
         super(obj.title);
-        this.id = dashBoardIdGenerator.next().value;
-        this.description = obj.description;
-        this._lists = [];
+        this.description= obj.description;
     }
     get description() {
         return this._description;
@@ -103,9 +87,20 @@ class DashBoard extends Item {
     set description(value) {
         validator.validateStringType(value);
         validator.validateIfStringIsEmpty(value);
-        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_DASHBOARD_DESCRIPTION_LENGTH, MAX_DASHBOARD_DESCRIPTION_LENGTH);
+        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_EXTENDEDITEM_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_EXTENDEDITEM_DESCRIPTION_LENGTH);
         this._description = value;
     }
+}
+
+var dashBoardIdGenerator = idGenerator();
+
+class DashBoard extends ExtendedItem {
+    constructor(obj) {
+        super(obj.title, obj.description);
+        this.id = dashBoardIdGenerator.next().value;
+        this._lists = [];
+    }
+
     get lists() {
         return this._lists;
     }
@@ -119,6 +114,9 @@ class DashBoard extends Item {
         var index = lists.indexOf(id);
         if (index > -1) {
             lists.splice(index, 1);
+        }
+        else {
+            throw new Error('There is no list with such id in the dashboard!'); 
         }
 
         return this;
@@ -141,28 +139,18 @@ class DashBoard extends Item {
 
 var listIdGenerator = idGenerator();
 
-class List extends Item {
+class List extends ExtendedItem {
     constructor(obj) {
-        super(obj.title);
-        this.id = listIdGenerator.next().value;
-        this.description = obj.description;
+        super(obj.title, obj.description);
+        this.id = listIdGenerator.next().value;   
         this._tasks =[];
     }
-    get description() {
-        return this._description;
-    }
-
-    set description(value) {
-        validator.validateStringType(value);
-        validator.validateIfStringIsEmpty(value);
-        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_LIST_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_LIST_DESCRIPTION_LENGTH);
-        this._description = value;
-    }
+  
     get tasks() {
         return this._tasks;
     }
     addTask(task) {
-        this.tasks.push(task);
+        this._tasks.push(task);
 
         return this;
     }
@@ -171,6 +159,9 @@ class List extends Item {
 
         if (index > -1) {
             tasks.splice(index, 1);
+        }
+        else {
+            throw new Error('There is no task with such id in the list!'); 
         }
 
         return this;
@@ -191,25 +182,14 @@ class List extends Item {
 
 var taskIdGenerator = idGenerator();
 
-class Task extends Item {
+class Task extends ExtendedItem {
     constructor(obj) {
-        super(obj.title)
-        this.id = taskIdGenerator.next().value;
-        this.description = obj.description;
+        super(obj.title, obj.description)
+        this.id = taskIdGenerator.next().value;      
         this.deadline = obj.deadline;
         this._checkList = [];
         this.TaskSolvedInPercenteges = 0;
-    }
-
-    get description() {
-        return this._description;
-    }
-    set description(value) {
-        validator.validateStringType(value);
-        validator.validateIfStringIsEmpty(value);
-        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_TASK_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_TASK_DESCRIPTION_LENGTH)
-        this._description = value;
-    }
+    }     
     get deadline() {
         return this._deadline;
     }
@@ -232,10 +212,13 @@ class Task extends Item {
         if (index > -1) {
             checklist.splice(index, 1);
         }
+        else {
+            throw new Error('There is no checkbox with such id in the checklist!');
+        }
         return this;
     }
     //TODO:make function to list all checkboxes in the checklist
-    isTaskDone() {
+    isTaskDone() { //get
         var countOfCompletedCheckBoxes = 0;
         for (let checkbox of checkList) {
             if (checkbox.isComplete === true) {
@@ -243,7 +226,7 @@ class Task extends Item {
             }
         }
         let percentegePerOneCheckBox = 100 / checkList.length;
-        this.TaskSolvedInPercenteges = percentegePerOneCheckBox * countOfCompletedCheckBoxes;
+        return this.TaskSolvedInPercenteges = percentegePerOneCheckBox * countOfCompletedCheckBoxes;
     }
 }
 
@@ -257,6 +240,9 @@ class CheckBox extends Item {
     }
     get isComplete() {
         return this._isComplete;
+    }
+    set isComplete(){
+        //TODO
     }
 }
 

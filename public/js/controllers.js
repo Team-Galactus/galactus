@@ -93,19 +93,24 @@ let controllers = {
             },
 
             dashboardLists(id) {
-                console.log("Lists",id);
                 Promise.all([
                     dataService.dashboardLists(id),
                     templates.get('main'),
+                    templates.get('dashboardNav'),
                     templates.get('list')
                 ])
-                .then(([data, mainTemplate, listsTemplate]) => {
+                .then(([data, mainTemplate, dashboardTemplate, listsTemplate]) => {
+
+                    let dashboards = JSON.parse(localStorage.getItem('dashboards'));
                     let mainCompiledTemplate = Handlebars.compile(mainTemplate),
+                        dashboardCompiledTemplate = Handlebars.compile(dashboardTemplate),
                         listsCompiledTemplate = Handlebars.compile(listsTemplate),
                         mainHtml = mainCompiledTemplate(),
+                        dashboardHtml = dashboardCompiledTemplate(dashboards),
                         listsHtml = listsCompiledTemplate(data.Result);
 
                     $('#main').html(mainHtml);
+                    $('#dashboardNav').html(dashboardHtml);
                     $('#listsHolder').html(listsHtml);
                     console.log("List results: ", data.Result);
                 });

@@ -79,7 +79,7 @@ var dataService = {
     addList(list) {
         const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
         const modifiedList = {
-            //id: `${list.id}`,
+            id: `${list.id}`,
             title: list.title,
             description: list.description
             //tasks: list.tasks
@@ -104,6 +104,9 @@ var dataService = {
         return requester
            .getJSON(`https://api.everlive.com/v1/${appID}/DashBoard`, options)
            .then((response) => {
+
+               localStorage.setItem('dashboards',JSON.stringify(response.Result));
+
                return response;
            })
            .catch((error) => {

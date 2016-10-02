@@ -36,11 +36,11 @@ h2, h3, h4{
 .addItemBtn {
     background: none;
     border: none;
-    text-decoration: underline;
     margin: 10px;
     text-align: right;
     display: block;
     cursor:pointer;
+    float: right;
 }
 .hidden {
     display: none;
@@ -91,9 +91,11 @@ h2, h3, h4{
     background: -webkit-linear-gradient(top, #c6dcf4 0%,#bbd7f6 42%,#86bbf4 100%)!important;
     background: linear-gradient(to bottom, #c6dcf4 0%,#bbd7f6 42%,#86bbf4 100%)!important;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6dcf4', endColorstr='#86bbf4',GradientType=0 );
-    color: #060090!important;
+    color: #fff!important;
     font-weight: 600;
     border: none!important;
+    text-shadow: 1px 0px 1px #aaa9a9;
+    box-shadow: 1px 1px 6px 1px #c3daf4!important;
 }
 .btn:hover{
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0cdaff+0,09a2d5+42,0b84e0+100 */

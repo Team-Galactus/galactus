@@ -18,7 +18,7 @@ var dataService = {
         };
 
         return requester
-            .postJSON(`http://api.everlive.com/v1/${appID}/oauth/token`, userData)
+            .postJSON(`https://api.everlive.com/v1/${appID}/oauth/token`, userData)
             .then((response) => {
                 return {
                     loggedInSuccessfully: true,
@@ -46,7 +46,7 @@ var dataService = {
         const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
 
         return requester
-            .getJSON(`http://api.everlive.com/v1/${appID}/oauth/logout`, options)
+            .getJSON(`https://api.everlive.com/v1/${appID}/oauth/logout`, options)
             .then((response) => {
                 return user.username;
             })

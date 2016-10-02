@@ -42,7 +42,7 @@ let controllers = {
                     .logout()
                     .then((response) => {
                         if (response !== null) {
-                            toastr.success(`${response.username} logged out successfully!`);
+                            toastr.success(`${response} logged out successfully!`);
                         }
                         localStorage.removeItem("user");
                         $("#dashboardNav").html("");

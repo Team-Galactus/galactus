@@ -147,3 +147,7 @@ input[type="checkbox"]:checked + label {
     color:#777777;
 }
 /*CHECKLIST STYLES END*/
+
+.hidden {
+    display: none;
+}

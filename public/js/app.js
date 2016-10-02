@@ -22,12 +22,14 @@ function setNavigationElementsVisibility(hide) {
         $('#nav-btn-login').addClass('hidden');
         $('#nav-btn-register').addClass('hidden');
         $('#nav-btn-logout').removeClass('hidden');
+        $('.welcomeHolder a').addClass('hidden');
     } else {
         $("#tb-username").removeClass("hidden");
         $("#tb-password").removeClass("hidden");
         $('#nav-btn-login').removeClass('hidden');
         $('#nav-btn-register').removeClass('hidden');
         $('#nav-btn-logout').addClass('hidden');
+        $('.welcomeHolder a').removeClass('hidden');
     }
 }
 

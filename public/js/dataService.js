@@ -44,7 +44,7 @@ var dataService = {
         const user = JSON.parse(localStorage.getItem("user"));
         const accessToken = user.access_token;
         const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
-
+        
         return requester
             .getJSON(`https://api.everlive.com/v1/${appID}/oauth/logout`, options)
             .then((response) => {

@@ -132,6 +132,7 @@ var dataService = {
         return requester
             .getJSON(`https://api.everlive.com/v1/${appID}/DashBoard/${id.id}`, options)
             .then((response) => {
+                localStorage.setItem('lists',JSON.stringify(response.Result));
                 return response;
             })
             .catch((error) => {
@@ -164,5 +165,49 @@ var dataService = {
             .then(() => {
                 return Promise.resolve();
             });
-    }
+    },
+
+    list(listId) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = {
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "X-Everlive-Expand": JSON.stringify({
+                    "tasks": {
+                        "TargetTypeName" : "Task"
+                    }
+                })
+            }
+        };
+
+        return requester
+            .getJSON(`https://api.everlive.com/v1/${appID}/List/${listId}`, options)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                return null;
+            })
+    },
+
+    addTask(task) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        const modifiedTask = {
+            id: `${task.id}`,
+            title: task.title,
+            description: task.description
+        };
+
+
+        return requester
+            .postJSON(`https://api.everlive.com/v1/${appID}/Task`, modifiedTask, options)
+            .then((response) => {
+                return Promise.resolve(response.Result);
+            })
+            .catch((error) => {
+                return Promise.reject();
+            });
+    },
 };

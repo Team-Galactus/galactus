@@ -43,10 +43,10 @@ router
         "register": controllersInstance.register,
         "dashboard": controllersInstance.dashboard,
         "dashboard/:id": controllersInstance.dashboardLists,
+        "dashboard/:dashboardId/list/:listId": controllersInstance.listPreview,
         "": (() => {
             router.navigate("/home");
         })
-        //"dashboard/:id/lists/:id":
     })
     .resolve(); // Very Important !!!
 
@@ -121,6 +121,38 @@ $(document).ready(() => {
                     console.log("hoho");
                     controllersInstance.dashboardLists(dashboardId);
                 });
+            })
+            .catch(() => {
+                toastr.error('List not successfully added!');
+            });
+
+    });
+
+    //submit event for addList modal
+    $('#addTask').click((event) => {
+        event.preventDefault();
+        let newTask = {},
+            taskTitle = $('#taskTitle').val(),
+            taskDescription = $('#taskDescription').val(),
+            taskDeadline = $('#taskDeadline').val();
+
+        newTask.title = taskTitle;
+        newTask.description = taskDescription;
+
+        let task = new Task(newTask);
+        let listId ={
+            "id": window.location.hash.split('/')[4]
+        };
+
+        dataService
+            .addTask(task)
+            .then((response) => {
+                console.log("SUCCessc baby:", response);
+                //dataService.updateDashboard(dashboardId, response.Id)
+                //    .then(() => {
+                //        console.log("hoho");
+                //        controllersInstance.dashboardLists(dashboardId);
+                //    });
             })
             .catch(() => {
                 toastr.error('List not successfully added!');

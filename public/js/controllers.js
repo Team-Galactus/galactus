@@ -112,7 +112,41 @@ let controllers = {
                     $('#main').html(mainHtml);
                     $('#dashboardNav').html(dashboardHtml);
                     $('#listsHolder').html(listsHtml);
-                    console.log("List results: ", data.Result);
+
+                    $('a[href*="dashboard/' + id.id + '"]').parent('li').addClass('active');
+                });
+            },
+
+            listPreview(dashboardId, listId) {
+                Promise.all([
+                    dataService.list(arguments[0].listId),
+                    templates.get('main'),
+                    templates.get('dashboardNav'),
+                    templates.get('list'),
+                    templates.get('listPreview')
+                ])
+                .then(([data, mainTemplate, dashboardTemplate, listsTemplate, listPreviewTemplate]) => {
+                    let dashboards = JSON.parse(localStorage.getItem('dashboards')),
+                        lists = JSON.parse(localStorage.getItem('lists'));
+
+                    let mainCompiledTemplate = Handlebars.compile(mainTemplate),
+                        dashboardCompiledTemplate = Handlebars.compile(dashboardTemplate),
+                        listsCompiledTemplate = Handlebars.compile(listsTemplate),
+                        listsPreviewCompiledTemplate = Handlebars.compile(listPreviewTemplate),
+
+                        mainHtml = mainCompiledTemplate(),
+                        dashboardHtml = dashboardCompiledTemplate(dashboards),
+                        listsHtml = listsCompiledTemplate(lists),
+                        listPreviewHtml = listsPreviewCompiledTemplate(data.Result);
+
+                    $('#main').html(mainHtml);
+                    $('#dashboardNav').html(dashboardHtml);
+                    $('#listsHolder').html(listsHtml);
+                    $('#listPreview').html(listPreviewHtml);
+
+                    console.log("Tasks: ", data.Result);
+                    $('a[href*="dashboard/' + arguments[0].dashboardId + '"]').parent('li').addClass('active');
+                    $('a[href*="list/' + arguments[0].listId + '"]').parents('li').addClass('active');
                 });
             }
         }

@@ -210,4 +210,31 @@ var dataService = {
                 return Promise.reject();
             });
     },
+
+    updateList(listId, taskId ) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        return this.list(listId.id)
+            .then((response)=>{
+                let listTaskIds = response.Result.tasks.map((task) => task.Id);
+                listTaskIds.push(taskId);
+
+                let updatedList = {
+                    "tasks": listTaskIds
+                };
+
+                return requester
+                    .putJSON(`https://api.everlive.com/v1/${appID}/List/${listId.id}`, updatedList, options)
+                    .then((response) => {
+                        return response;
+                    })
+                    .catch((error) => {
+                        return null;
+                    });
+            })
+            .then(() => {
+                return Promise.resolve();
+            });
+    },
 };

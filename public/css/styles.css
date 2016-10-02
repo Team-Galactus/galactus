@@ -210,8 +210,9 @@ a.navbar-brand {
     /*padding-bottom: 15px;*/
 }
 
-#listPreview h3 {
+.listPreview h3 {
     margin: 0;
+    text-transform: uppercase;
 }
 .taskPreview {
     box-shadow: 1px 3px 9px -1px rgba(0, 0, 0, 0.64)!important;

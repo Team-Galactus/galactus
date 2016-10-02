@@ -143,16 +143,18 @@ $(document).ready(() => {
         let listId ={
             "id": window.location.hash.split('/')[4]
         };
+        let dashboardId ={
+            "id": window.location.hash.split('/')[2]
+        };
 
         dataService
             .addTask(task)
             .then((response) => {
-                console.log("SUCCessc baby:", response);
-                //dataService.updateDashboard(dashboardId, response.Id)
-                //    .then(() => {
-                //        console.log("hoho");
-                //        controllersInstance.dashboardLists(dashboardId);
-                //    });
+                dataService.updateList(listId, response.Id)
+                    .then(() => {
+                        console.log("hoho");
+                        controllersInstance.listPreview({"dashboardId":dashboardId, "listId":listId.id});
+                    });
             })
             .catch(() => {
                 toastr.error('List not successfully added!');

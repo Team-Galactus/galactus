@@ -118,6 +118,7 @@ let controllers = {
             },
 
             listPreview(dashboardId, listId) {
+                console.log(arguments);
                 Promise.all([
                     dataService.list(arguments[0].listId),
                     templates.get('main'),

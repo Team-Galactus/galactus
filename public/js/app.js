@@ -78,20 +78,22 @@ $(document).ready(() => {
     $('#addDashboard').click((event) => {
         event.preventDefault();
         let newDashboard = {},
-            $dashboardList = $('#dashboardList'),
             dashboardTitle = $('#dashboardTitle').val(),
             dashboardDescription = $('#dashboardDescription').val();
 
         newDashboard.title = dashboardTitle;
         newDashboard.description = dashboardDescription;
 
-        $dashboardList.find('li.active').removeClass('active');
-        $dashboardList.append('<li class="active">' +
-                '<a href="#">' +
-                    '<h2>' + newDashboard.title + '</h2>' +
-                    '<p class="subTitle">' + newDashboard.description + '</p>' +
-                '</a>' +
-            '</li>');
+        let dashboard = new DashBoard(newDashboard);
+
+        dataService
+            .addDashboard(dashboard)
+            .then(() => {
+                controllersInstance.dashboard();
+            })
+            .catch(() => {
+                toastr.error('Dashboard not added successfully!');
+            });
     });
 
     //submit event for addList modal

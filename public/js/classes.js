@@ -45,22 +45,22 @@ function* idGenerator() {
 
 /*constants*/
 const LENGTHS_OF_STRINGS = {
-    MIN_TITLE_LENGTH=2,
-    MAX_TITLE_LENGTH=20,
-    MIN_DASHBOARD_DESCRIPTION_LENGTH=5,
-    MAX_DASHBOARD_DESCRIPTION_LENGTH=2,
-    MIN_LIST_DESCRIPTION_LENGTH=5,
-    MAX_LIST_DESCRIPTION_LENGTH=30,
-    MIN_TASK_DESCRIPTION_LENGTH=5,
-    MAX_TASK_DESCRIPTION_LENGTH=90,
-    MIN_USERNAME_LENGTH=3,
-    MAX_USERNAME_LENGTH=15
+    MIN_TITLE_LENGTH:2,
+    MAX_TITLE_LENGTH:20,
+    MIN_DASHBOARD_DESCRIPTION_LENGTH:5,
+    MAX_DASHBOARD_DESCRIPTION_LENGTH:200,
+    MIN_LIST_DESCRIPTION_LENGTH:5,
+    MAX_LIST_DESCRIPTION_LENGTH:30,
+    MIN_TASK_DESCRIPTION_LENGTH:5,
+    MAX_TASK_DESCRIPTION_LENGTH:90,
+    MIN_USERNAME_LENGTH:3,
+    MAX_USERNAME_LENGTH:15
 }
 
 const ERROR_MESSAGES = {
-    WRONG_LIST_ID='There is not a list with such id in this dashboard.',
-    WRONG_TASK_ID='There is not a task with such id in this list of tasks.',
-    WRONG_USERNAME='The username should content only characters.'
+    WRONG_LIST_ID:'There is not a list with such id in this dashboard.',
+    WRONG_TASK_ID:'There is not a task with such id in this list of tasks.',
+    WRONG_USERNAME:'The username should content only characters.'
 }
 
 
@@ -71,19 +71,21 @@ class Item {
         this.id = 0;
         this.title = obj.title;
     }
+
     get id() {
         return this._id;
     }
     set id(value) {
         this._id = value;
     }
+
     get title() {
         return this._title;
     }
     set title(value) {
         validator.validateStringType(value);
         validator.validateIfStringIsEmpty(value);
-        validateStringLength(value, LENGTHS_OF_STRINGS.MIN_TITLE_LENGTH, LENGTHS_OF_STRINGS.MAX_TITLE_LENGTH);
+        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_TITLE_LENGTH, LENGTHS_OF_STRINGS.MAX_TITLE_LENGTH);
         this._title = value;
     }
 }
@@ -92,7 +94,7 @@ var dashBoardIdGenerator = idGenerator();
 
 class DashBoard extends Item {
     constructor(obj) {
-        super(obj.title);
+        super(obj);
         this.id = dashBoardIdGenerator.next().value;
         this.description = obj.description;
         this._lists = [];
@@ -103,7 +105,7 @@ class DashBoard extends Item {
     set description(value) {
         validator.validateStringType(value);
         validator.validateIfStringIsEmpty(value);
-        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_DASHBOARD_DESCRIPTION_LENGTH, MAX_DASHBOARD_DESCRIPTION_LENGTH);
+        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_DASHBOARD_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_DASHBOARD_DESCRIPTION_LENGTH);
         this._description = value;
     }
     get lists() {

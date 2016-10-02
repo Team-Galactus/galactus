@@ -75,16 +75,20 @@ let controllers = {
                     templates.get('dashboardNav')
                 ])
                 .then(([data, mainTemplate, dashboardNavTemplate]) => {
-
                     let mainCompiledTemplate = Handlebars.compile(mainTemplate),
                         dashboardCompiledTemplate = Handlebars.compile(dashboardNavTemplate),
                         mainHtml = mainCompiledTemplate(),
-                        dashboardHtml = dashboardCompiledTemplate(data.result);
+                        dashboardHtml = dashboardCompiledTemplate(data.Result);
 
                     $('#main').html(mainHtml);
                     $('#dashboardNav').html(dashboardHtml);
 
                     console.log("Dashboard results: ", data);
+
+                    return Promise.resolve();
+                })
+                .catch(() => {
+                    return Promise.reject();
                 });
             },
 

@@ -55,7 +55,26 @@ var dataService = {
     },
 
     addDashboard(dashboard) {
-        
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const modifiedDashboard = {
+            id: `${dashboard.id}`,
+            title: dashboard.title,
+            description: dashboard.description,
+            lists: dashboard.lists
+        };
+
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        return requester
+            .postJSON(`https://api.everlive.com/v1/${appID}/DashBoard`, modifiedDashboard, options)
+            .then((response) => {
+                console.log("1");
+                return Promise.resolve();
+            })
+            .catch((error) => {
+                console.log("2");
+                return Promise.reject();
+            });
     },
 
     dashboards() {
@@ -65,8 +84,8 @@ var dataService = {
         return requester
            .getJSON(`https://api.everlive.com/v1/${appID}/DashBoard`, options)
            .then((response) => {
-                return response;
-            })
+               return response;
+           })
            .catch((error) => {
                return null;
            });

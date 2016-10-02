@@ -71,10 +71,15 @@ let controllers = {
                 .then(([data, template]) => {
 
                     let compiledTemplate = Handlebars.compile(template),
-                        html = compiledTemplate(data.result);
+                        html = compiledTemplate(data.Result);
 
                     $('#dashboardNav').html(html);
                     console.log("Dashboard results: ", data);
+
+                    return Promise.resolve();
+                })
+                .catch(() => {
+                    return Promise.reject();
                 });
             },
 
@@ -92,6 +97,5 @@ let controllers = {
                 });
             }
         }
-        //});
     }
 };

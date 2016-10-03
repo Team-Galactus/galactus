@@ -16,9 +16,9 @@ Task Manager- SPA in which you can:
 |:----:|:-----------------------|:-----------------------------|
 | Angelina Markova | Angelina.Markova | angelinamarkova |
 | Miroslav Markov | marks | madmarks |
-| Stoyan Toshkov | stoian_tashkov | stoiantashkov |
+| Stoyan Tashkov | stoian_tashkov | stoiantashkov |
 | Iliana Alexandrova | iliana_diki | iliana-diki |
-| Dimitur Popov | mitkop | molivpopov |
+| Dimitar Popov | mitkop | molivpopov |
 
 ## Live demo
 [**Galactus Task Manager**](https://raw.githack.com/Team-Galactus/galactus/master/public/index.html)

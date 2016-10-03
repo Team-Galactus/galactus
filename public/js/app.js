@@ -10,6 +10,41 @@ let controllersInstance = controllers.get(dataService, templates);
 
 let router = new Navigo(null, true);
 
+dataService
+    .isLoggedIn()
+    .then(setNavigationElementsVisibility);
+
+router
+    .on({ // the order of the added routes using this method does not matter anymore
+        "home": controllersInstance.home,
+        "register": controllersInstance.registerUser,
+        "dashboard": controllersInstance.dashboard,
+        "dashboard/:id": controllersInstance.dashboardLists,
+        "dashboard/:dashboardId/list/:listId": controllersInstance.listPreview,
+        "": (() => {
+            router.navigate("/home");
+        })
+    })
+    .resolve();
+
+$(document).ready(() => {
+
+    $("#nav-btn-login").on("click", (ev) => {
+        ev.preventDefault();
+        controllersInstance
+            .loginUser()
+            .then(setNavigationElementsVisibility);
+    });
+
+    $('#nav-btn-logout').on('click', (ev) => {
+        ev.preventDefault();
+        controllersInstance
+            .logoutUser()
+            .then(setNavigationElementsVisibility);
+    });
+
+});
+
 function setNavigationElementsVisibility(hide) {
     if (hide) {
         $("#tb-username").addClass("hidden");
@@ -30,136 +65,3 @@ function setNavigationElementsVisibility(hide) {
         $('#btn-dashboards').addClass('hidden');
     }
 }
-
-dataService
-    .isLoggedIn()
-    .then(setNavigationElementsVisibility);
-
-router
-    .on({ // the order of the added routes using this method does not matter anymore
-        "home": controllersInstance.home,
-        "register": controllersInstance.registerUser,
-        "dashboard": controllersInstance.dashboard,
-        "dashboard/:id": controllersInstance.dashboardLists,
-        "dashboard/:dashboardId/list/:listId": controllersInstance.listPreview,
-        "": (() => {
-            router.navigate("/home");
-        })
-    })
-    .resolve(); // Very Important !!!
-
-$(document).ready(() => {
-
-    $("#nav-btn-login").on("click", (ev) => {
-        // The preventDefault() method cancels the event if it is cancelable
-        // For example, this can be useful when:
-        //
-        //    1. Clicking on a "Submit" button, prevent it from submitting a form
-        //    2. Clicking on a link, prevent the link from following the URL
-        ev.preventDefault();
-        controllersInstance
-            .loginUser()
-            .then(setNavigationElementsVisibility);
-    });
-
-    $('#nav-btn-logout').on('click', (ev) => {
-        ev.preventDefault();
-        controllersInstance
-            .logoutUser()
-            .then(setNavigationElementsVisibility);
-    });
-
-    //toggle navigation link active class
-    $('#dashboardNav').on('click', "li", (event) => {
-        $("#dashboardNav li.active").removeClass("active");
-        $(event.currentTarget).addClass(" active");
-    });
-
-    //submit event for addDashboard modal
-    $('#addDashboard').click((event) => {
-        event.preventDefault();
-        let newDashboard = {},
-            dashboardTitle = $('#dashboardTitle').val(),
-            dashboardDescription = $('#dashboardDescription').val();
-
-        newDashboard.title = dashboardTitle;
-        newDashboard.description = dashboardDescription;
-
-        let dashboard = new DashBoard(newDashboard);
-
-        dataService
-            .addDashboard(dashboard)
-            .then(() => {
-                controllersInstance.dashboard();
-            })
-            .catch(() => {
-                toastr.error('Dashboard not added successfully!');
-            });
-    });
-
-    //submit event for addList modal
-    $('#addList').click((event) => {
-        event.preventDefault();
-        let newList = {},
-            listTitle = $('#listTitle').val(),
-            listDescription = $('#listDescription').val();
-
-        newList.title = listTitle;
-        newList.description = listDescription;
-
-        let list = new List(newList);
-        let dashboardId ={
-            "id": window.location.hash.split('/')[2]
-        };
-
-        dataService
-            .addList(list)
-            .then((response) => {
-                dataService.updateDashboard(dashboardId, response.Id)
-                .then(() => {
-                    console.log("hoho");
-                    controllersInstance.dashboardLists(dashboardId);
-                });
-            })
-            .catch(() => {
-                toastr.error('List not successfully added!');
-            });
-
-    });
-
-    //submit event for addList modal
-    $('#addTask').click((event) => {
-        event.preventDefault();
-        let newTask = {},
-            taskTitle = $('#taskTitle').val(),
-            taskDescription = $('#taskDescription').val(),
-            taskDeadline = new Date($('#taskDeadline').val());
-
-        newTask.title = taskTitle;
-        newTask.description = taskDescription;
-        newTask.deadline = taskDeadline.toISOString();
-
-        let task = new Task(newTask);
-        let listId ={
-            "id": window.location.hash.split('/')[4]
-        };
-        let dashboardId ={
-            "id": window.location.hash.split('/')[2]
-        };
-
-        dataService
-            .addTask(task)
-            .then((response) => {
-                dataService.updateList(listId, response.Id)
-                    .then(() => {
-                        console.log("hoho");
-                        controllersInstance.listPreview({"dashboardId":dashboardId, "listId":listId.id});
-                    });
-            })
-            .catch(() => {
-                toastr.error('List not successfully added!');
-            });
-    });
-
-});
-

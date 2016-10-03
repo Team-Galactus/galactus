@@ -85,37 +85,68 @@ let controllers = {
 
             home() {
                 Promise.all([
-                        templates.get('welcome'),
-                        dataService.isLoggedIn()
-                    ])
-                    .then(([template, isLoggedIn]) => {
-                        let compiledTemplate = Handlebars.compile(template),
-                            html = compiledTemplate();
-                        $('#main').html(html);
-                                
-                        if (isLoggedIn) {
-                            $('#btn-dashboards').removeClass('hidden');
-                        }
-                    });
+                    templates.get('welcome'),
+                    templates.get('footer'),
+                    dataService.isLoggedIn()
+                ])
+                .then(([homeTemplate, footerTemplate, isLoggedIn]) => {
+                    let compiledHomeTemplate = Handlebars.compile(homeTemplate),
+                        compiledFooterTemplate = Handlebars.compile(footerTemplate),
+                        homeHtml = compiledHomeTemplate(),
+                        footerHtml = compiledFooterTemplate();
+
+                    $('#main').html(homeHtml);
+                    $('footer').html(footerHtml);
+
+                    if (isLoggedIn) {
+                        $('#btn-dashboards').removeClass('hidden');
+                    }
+                });
             },
 
             dashboard() {
                 Promise.all([
                     dataService.dashboards(),
                     templates.get('main'),
-                    templates.get('dashboardNav')
+                    templates.get('dashboardNav'),
+                    templates.get('modals')
                 ])
-                .then(([data, mainTemplate, dashboardNavTemplate]) => {
+                .then(([data, mainTemplate, dashboardNavTemplate, modalsTemplate]) => {
                     let mainCompiledTemplate = Handlebars.compile(mainTemplate),
                         dashboardCompiledTemplate = Handlebars.compile(dashboardNavTemplate),
+                        modalsCompiledTemplate = Handlebars.compile(modalsTemplate),
+
                         mainHtml = mainCompiledTemplate(),
-                        dashboardHtml = dashboardCompiledTemplate(data.Result);
+                        dashboardHtml = dashboardCompiledTemplate(data.Result),
+                        modalsHtml = modalsCompiledTemplate();
 
                     $('#main').html(mainHtml);
                     $('#dashboardNav').html(dashboardHtml);
+                    $('#modals').html(modalsHtml);
+
+                    //submit event for addDashboard modal
+                    $('#addDashboard').click((event) => {
+                        event.preventDefault();
+                        let newDashboard = {},
+                            dashboardTitle = $('#dashboardTitle').val(),
+                            dashboardDescription = $('#dashboardDescription').val();
+
+                        newDashboard.title = dashboardTitle;
+                        newDashboard.description = dashboardDescription;
+
+                        let dashboard = new DashBoard(newDashboard);
+
+                        dataService
+                            .addDashboard(dashboard)
+                            .then(() => {
+                                controllersInstance.dashboard();
+                            })
+                            .catch(() => {
+                                toastr.error('Dashboard not added successfully!');
+                            });
+                    });
 
                     console.log("Dashboard results: ", data);
-
                     return Promise.resolve();
                 })
                 .catch(() => {
@@ -128,36 +159,72 @@ let controllers = {
                     dataService.dashboardLists(id),
                     templates.get('main'),
                     templates.get('dashboardNav'),
-                    templates.get('list')
+                    templates.get('list'),
+                    templates.get('modals')
                 ])
-                .then(([data, mainTemplate, dashboardTemplate, listsTemplate]) => {
+                .then(([data, mainTemplate, dashboardTemplate, listsTemplate, modalsTemplate]) => {
 
                     let dashboards = JSON.parse(localStorage.getItem('dashboards'));
+
                     let mainCompiledTemplate = Handlebars.compile(mainTemplate),
                         dashboardCompiledTemplate = Handlebars.compile(dashboardTemplate),
                         listsCompiledTemplate = Handlebars.compile(listsTemplate),
+                        modalsCompiledTemplate = Handlebars.compile(modalsTemplate),
+
                         mainHtml = mainCompiledTemplate(),
                         dashboardHtml = dashboardCompiledTemplate(dashboards),
-                        listsHtml = listsCompiledTemplate(data.Result);
+                        listsHtml = listsCompiledTemplate(data.Result),
+                        modalsHtml = modalsCompiledTemplate();
 
                     $('#main').html(mainHtml);
                     $('#dashboardNav').html(dashboardHtml);
                     $('#listsHolder').html(listsHtml);
+                    $('#modals').html(modalsHtml);
 
                     $('a[href*="dashboard/' + id.id + '"]').parent('li').addClass('active');
+
+                    //submit event for addList modal
+                    $('#addList').click((event) => {
+                        event.preventDefault();
+                        let newList = {},
+                            listTitle = $('#listTitle').val(),
+                            listDescription = $('#listDescription').val();
+
+                        newList.title = listTitle;
+                        newList.description = listDescription;
+
+                        let list = new List(newList);
+                        let dashboardId ={
+                            "id": window.location.hash.split('/')[2]
+                        };
+
+                        dataService
+                            .addList(list)
+                            .then((response) => {
+                                dataService.updateDashboard(dashboardId, response.Id)
+                                    .then(() => {
+                                        console.log("hoho");
+                                        controllersInstance.dashboardLists(dashboardId);
+                                    });
+                            })
+                            .catch(() => {
+                                toastr.error('List not successfully added!');
+                            });
+
+                    });
                 });
             },
 
             listPreview(dashboardId, listId) {
-                console.log(arguments);
                 Promise.all([
                     dataService.list(arguments[0].listId),
                     templates.get('main'),
                     templates.get('dashboardNav'),
                     templates.get('list'),
-                    templates.get('listPreview')
+                    templates.get('listPreview'),
+                    templates.get('modals')
                 ])
-                .then(([data, mainTemplate, dashboardTemplate, listsTemplate, listPreviewTemplate]) => {
+                .then(([data, mainTemplate, dashboardTemplate, listsTemplate, listPreviewTemplate, modalsTemplate]) => {
                     let dashboards = JSON.parse(localStorage.getItem('dashboards')),
                         lists = JSON.parse(localStorage.getItem('lists'));
 
@@ -165,21 +232,58 @@ let controllers = {
                         dashboardCompiledTemplate = Handlebars.compile(dashboardTemplate),
                         listsCompiledTemplate = Handlebars.compile(listsTemplate),
                         listsPreviewCompiledTemplate = Handlebars.compile(listPreviewTemplate),
+                        modalsCompiledTemplate = Handlebars.compile(modalsTemplate),
 
                         mainHtml = mainCompiledTemplate(),
                         dashboardHtml = dashboardCompiledTemplate(dashboards),
                         listsHtml = listsCompiledTemplate(lists),
-                        listPreviewHtml = listsPreviewCompiledTemplate(data.Result);
+                        listPreviewHtml = listsPreviewCompiledTemplate(data.Result),
+                        modalsHtml = modalsCompiledTemplate();
 
                     $('#main').html(mainHtml);
                     $('#dashboardNav').html(dashboardHtml);
                     $('#listsHolder').html(listsHtml);
                     $('#listPreview').html(listPreviewHtml);
+                    $('#modals').html(modalsHtml);
 
-                    console.log("Tasks: ", data.Result);
                     $('a[href*="dashboard/' + arguments[0].dashboardId + '"]').parent('li').addClass('active');
                     $('a[href*="list/' + arguments[0].listId + '"]').parents('li').addClass('active');
 
+                    //submit event for addList modal
+                    $('#addTask').click((event) => {
+                        event.preventDefault();
+                        let newTask = {},
+                            taskTitle = $('#taskTitle').val(),
+                            taskDescription = $('#taskDescription').val(),
+                            taskDeadline = new Date($('#taskDeadline').val());
+
+                        newTask.title = taskTitle;
+                        newTask.description = taskDescription;
+                        newTask.deadline = taskDeadline.toISOString();
+
+                        let task = new Task(newTask);
+                        let listId ={
+                            "id": window.location.hash.split('/')[4]
+                        };
+                        let dashboardId ={
+                            "id": window.location.hash.split('/')[2]
+                        };
+
+                        dataService
+                            .addTask(task)
+                            .then((response) => {
+                                dataService.updateList(listId, response.Id)
+                                    .then(() => {
+                                        console.log("hoho");
+                                        controllersInstance.listPreview({"dashboardId":dashboardId, "listId":listId.id});
+                                    });
+                            })
+                            .catch(() => {
+                                toastr.error('List not successfully added!');
+                            });
+                    });
+
+                        //add checkbox and connect it to current task
                     $('.addNewCheckbox').click((event) => {
                         event.preventDefault();
                         let newCheckbox = {},
@@ -198,7 +302,6 @@ let controllers = {
                             .then((response) => {
                                 dataService.updateTask(taskId, response.Id)
                                     .then(() => {
-                                        console.log("hoho");
                                         controllersInstance.listPreview({"dashboardId":arguments[0].dashboardId, "listId": arguments[0].listId});
                                     });
                             })

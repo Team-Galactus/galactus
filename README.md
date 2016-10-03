@@ -25,4 +25,4 @@ Task Manager- SPA in which you can:
 
 ## Video demo
 
-[**YouTube**](https://www.youtube.com/watch?v=3q252rN2nwE)
+[**YouTube**](https://www.youtube.com/watch?v=DBqzDgJAQTA&feature=youtu.be)

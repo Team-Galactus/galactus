@@ -272,18 +272,19 @@ let controllers = {
                         dataService
                             .addTask(task)
                             .then((response) => {
-                                dataService.updateList(listId, response.Id)
-                                    .then(() => {
-                                        console.log("hoho");
-                                        controllersInstance.listPreview({"dashboardId":dashboardId, "listId":listId.id});
-                                    });
+                                return dataService
+                                    .updateList(listId, response.Id);
+                            })
+                            .then(() => {
+                                console.log("hoho");
+                                controllersInstance.listPreview({"dashboardId":dashboardId, "listId":listId.id});
                             })
                             .catch(() => {
-                                toastr.error('List not successfully added!');
+                                toastr.error('Task not successfully added!');
                             });
                     });
 
-                        //add checkbox and connect it to current task
+                    //add checkbox and connect it to current task
                     $('.addNewCheckbox').click((event) => {
                         event.preventDefault();
                         let newCheckbox = {},
@@ -300,10 +301,11 @@ let controllers = {
                         dataService
                             .addCheckbox(checkbox)
                             .then((response) => {
-                                dataService.updateTask(taskId, response.Id)
-                                    .then(() => {
-                                        controllersInstance.listPreview({"dashboardId":arguments[0].dashboardId, "listId": arguments[0].listId});
-                                    });
+                                return dataService
+                                    .updateTask(taskId, response.Id);
+                            })
+                            .then(() => {
+                                controllersInstance.listPreview({"dashboardId":arguments[0].dashboardId, "listId": arguments[0].listId});
                             })
                             .catch(() => {
                                 toastr.error('List not successfully added!');

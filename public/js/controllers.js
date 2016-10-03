@@ -84,12 +84,19 @@ let controllers = {
             },
 
             home() {
-                templates.get('welcome')
-                .then((template) => {
-                    let compiledTemplate = Handlebars.compile(template),
-                        html = compiledTemplate();
-                    $('#main').html(html);
-                });
+                Promise.all([
+                        templates.get('welcome'),
+                        dataService.isLoggedIn()
+                    ])
+                    .then(([template, isLoggedIn]) => {
+                        let compiledTemplate = Handlebars.compile(template),
+                            html = compiledTemplate();
+                        $('#main').html(html);
+                                
+                        if (isLoggedIn) {
+                            $('#btn-dasboards').removeClass('hidden');
+                        }
+                    });
             },
 
             dashboard() {

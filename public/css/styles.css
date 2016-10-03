@@ -75,7 +75,7 @@ h2, h3, h4{
     /* align-items: center; */
     justify-content: center;
     flex-wrap: wrap;
-    height: 100vh;
+    height: 80vh;
 }
 .welcomeHolder h1 {
     font-size: 4em;

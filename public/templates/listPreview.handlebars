@@ -11,7 +11,7 @@
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#task{{Id}}" aria-expanded="true" aria-controls="task{{Id}}">
                             <h4 class="panel-title">{{title}}</h4>
                             <div class="deadline">
-                                <span><em>Due Date: </em></span><strong>{{dateFilter deadline}}</strong>
+                                <span><em>Due Date:  </em></span><strong>{{dateFilter deadline}}</strong>
                             </div>
                         </a>
                     </div>
@@ -26,13 +26,25 @@
                                         <div class="checklist">
                                             <h5>Checklist</h5>
                                             <form class="checklistForm">
-                                                {{#each checklist}}
+                                                {{#each checkList}}
                                                     <div class="singleCheck">
                                                         <input type="checkbox" value="completed">
                                                         <label>Checkbox 1 </label>
                                                     </div>
                                                 {{/each}}
                                             </form>
+                                            <div class="collapse" id="addCheckboxHolder{{Id}}">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input data-taskId="{{Id}}" class="form-control checkboxTitle addCheckTitle" type="text" placeholder="Add a checkbox">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <button class="btn btn-default addNewCheckbox" role="button">Add</button>
+                                                        <a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckboxHolder{{Id}}" aria-expanded="true" aria-controls="addCheckboxHolder{{Id}}"><span aria-hidden="true">&times;</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn addItemBtn" role="button" data-toggle="collapse" href="#addCheckboxHolder{{Id}}" aria-expanded="false" aria-controls="addCheckboxHolder{{Id}}">+ Add Checkbox</a>
                                         </div>
                                     </div>
                                 </div>

@@ -160,7 +160,6 @@ $(document).ready(() => {
             .catch(() => {
                 toastr.error('List not successfully added!');
             });
-
     });
 
 });

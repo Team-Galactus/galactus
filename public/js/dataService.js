@@ -238,4 +238,74 @@ var dataService = {
                 return Promise.resolve();
             });
     },
+
+    task(taskId) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = {
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "X-Everlive-Expand": JSON.stringify({
+                    "checkList": {
+                        "TargetTypeName" : "CheckBoxes"
+                    }
+                })
+            }
+        };
+
+        return requester
+            .getJSON(`https://api.everlive.com/v1/${appID}/Task/${taskId}`, options)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                return null;
+            })
+    },
+
+    addCheckbox(checkbox) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        const modifiedCheckbox = {
+            id: `${checkbox.id}`,
+            title: checkbox.title
+        };
+
+        return requester
+            .postJSON(`https://api.everlive.com/v1/${appID}/CheckBoxes`, modifiedCheckbox, options)
+            .then((response) => {
+                return Promise.resolve(response.Result);
+            })
+            .catch((error) => {
+                return Promise.reject();
+            });
+    },
+
+    updateTask(taskId, checkboxId ) {
+        const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
+        const options = { headers: { "Authorization": `Bearer ${accessToken}` } };
+
+        return this.task(taskId.id)
+            .then((response)=>{
+                let taskCheckboxIds = response.Result.checkList.map((checkbox) => checkbox.Id);
+                taskCheckboxIds.push(checkboxId);
+
+                let updatedTask = {
+                    "checkList": taskCheckboxIds
+                };
+
+                return requester
+                    .putJSON(`https://api.everlive.com/v1/${appID}/Task/${taskId.id}`, updatedTask, options)
+                    .then((response) => {
+                        return response;
+                    })
+                    .catch((error) => {
+                        return null;
+                    });
+            })
+            .then(() => {
+                return Promise.resolve();
+            });
+    }
+
 };

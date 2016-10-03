@@ -241,6 +241,12 @@ a.navbar-brand {
 .addCheckTitle {
     margin-bottom: 5px;
 }
+.close.checkClose {
+    background: #0f264e!important;
+    opacity: 1;
+    box-shadow: initial!important;
+    float: left;
+}
 /*TASK STYLES END*/
 
 /*CHECKLIST STYLES*/

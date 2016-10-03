@@ -148,6 +148,35 @@ let controllers = {
                     console.log("Tasks: ", data.Result);
                     $('a[href*="dashboard/' + arguments[0].dashboardId + '"]').parent('li').addClass('active');
                     $('a[href*="list/' + arguments[0].listId + '"]').parents('li').addClass('active');
+
+                    $('.addNewCheckbox').click((event) => {
+                        event.preventDefault();
+                        let newCheckbox = {},
+                            $checkboxInput = $(event.currentTarget).parents('.checklist').find('.checkboxTitle'),
+                            checkboxTitle = $checkboxInput.val();
+
+                        newCheckbox.title = checkboxTitle;
+                        let checkbox = new CheckBox(newCheckbox);
+
+                        let taskId ={
+                            "id": $checkboxInput.data('taskid')
+                        };
+
+                        dataService
+                            .addCheckbox(checkbox)
+                            .then((response) => {
+                                dataService.updateTask(taskId, response.Id)
+                                    .then(() => {
+                                        console.log("hoho");
+                                        controllersInstance.listPreview({"dashboardId":arguments[0].dashboardId, "listId": arguments[0].listId});
+                                    });
+                            })
+                            .catch(() => {
+                                toastr.error('List not successfully added!');
+                            });
+
+                    });
+
                 });
             }
         }

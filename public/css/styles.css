@@ -13,7 +13,7 @@ a {
     color: #020518!important;
 }
 a:hover{
-    text-decoration: none;
+    text-decoration: none!important;
 }
 ul{
     padding:0;
@@ -75,7 +75,7 @@ h2, h3, h4{
     /* align-items: center; */
     justify-content: center;
     flex-wrap: wrap;
-    height: 100vh;
+    height: 80vh;
 }
 .welcomeHolder h1 {
     font-size: 4em;
@@ -283,10 +283,13 @@ footer {
 
 .form-login {
     width: 250px;
-    margin: 5px;
+    margin-bottom: 5px;
 }
-
+.registerHolder h3.heading {
+    font-size: 2em;
+    margin-bottom: 20px!important;
+}
 .form-register {
     width: 250px;
-    margin: 5px;
+    margin-bottom: 10px;
 }

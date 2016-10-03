@@ -54,6 +54,24 @@ var dataService = {
             });
     },
 
+    register(user) {
+        var userData = {
+            "Username": user.username,
+            "Password": user.password,
+            "DisplayName": "",
+            "Email": ""
+        }
+
+        return requester
+            .postJSON(`https://api.everlive.com/v1/${appID}/Users`, userData)
+            .then((response) => {
+                return Promise.resolve();
+            })
+            .catch((error) => {
+                return Promise.reject();
+            });
+    },
+
     addDashboard(dashboard) {
         const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
         const modifiedDashboard = {

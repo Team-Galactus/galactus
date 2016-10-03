@@ -38,7 +38,7 @@ dataService
 router
     .on({ // the order of the added routes using this method does not matter anymore
         "home": controllersInstance.home,
-        "register": controllersInstance.register,
+        "register": controllersInstance.registerUser,
         "dashboard": controllersInstance.dashboard,
         "dashboard/:id": controllersInstance.dashboardLists,
         "": (() => {
@@ -60,7 +60,8 @@ $("#nav-btn-login").on("click", (ev) => {
         .then(setNavigationElementsVisibility);
 });
 
-$('#nav-btn-logout').on('click', () => {
+$('#nav-btn-logout').on('click', (ev) => {
+    ev.preventDefault();
     controllersInstance
         .logoutUser()
         .then(setNavigationElementsVisibility);

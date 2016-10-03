@@ -5,8 +5,8 @@ var handlebars = handlebars || Handlebars;
 let controllers = {
     get(dataService, templates) {
         return {
-            loginUser() {
-                let user = {
+            loginUser(user) {
+                user = user || {
                     username: $("#tb-username").val(),
                     password: $("#tb-password").val()
                 };
@@ -55,8 +55,32 @@ let controllers = {
                     });
             },
 
-            register() {
-                
+            registerUser() {
+                templates.get('register')
+                    .then((template) => {
+                        let compiledTemplate = Handlebars.compile(template),
+                            html = compiledTemplate();
+                        $('#main').html(html);
+
+                        $('#btn-register').on('click', () => {
+                            let user = {
+                                username: $("#tb-register-username").val(),
+                                password: $("#tb-register-password").val()
+                            };
+
+                            return dataService
+                                .register(user)
+                                .then(() => {
+                                    return controllersInstance
+                                        .loginUser(user)
+                                        .then(setNavigationElementsVisibility);;
+                                })
+                                .catch(() => {
+                                    toastr.error('Invalid username, password or user with the same name already exists!');
+                                    return false;
+                                });
+                        });
+                    });
             },
 
             home() {

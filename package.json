@@ -24,7 +24,5 @@
   },
   "homepage": "https://github.com/Team-Galactus/galactus#readme",
   "dependencies": {
-    "systemjs": "^0.19.39",
-    "systemjs-plugin-babel": "0.0.15"
   }
 }

@@ -130,8 +130,6 @@ var dataService = {
            });
     },
 
-
-
     dashboardLists(id) {
         const accessToken = JSON.parse(localStorage.getItem("user")).access_token;
         const options = {
@@ -275,7 +273,7 @@ var dataService = {
             })
             .catch((error) => {
                 return null;
-            })
+            });
     },
 
     addCheckbox(checkbox) {

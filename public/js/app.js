@@ -134,10 +134,11 @@ $(document).ready(() => {
         let newTask = {},
             taskTitle = $('#taskTitle').val(),
             taskDescription = $('#taskDescription').val(),
-            taskDeadline = $('#taskDeadline').val();
+            taskDeadline = new Date($('#taskDeadline').val());
 
         newTask.title = taskTitle;
         newTask.description = taskDescription;
+        newTask.deadline = taskDeadline.toISOString();
 
         let task = new Task(newTask);
         let listId ={

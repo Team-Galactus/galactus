@@ -283,10 +283,13 @@ footer {
 
 .form-login {
     width: 250px;
-    margin: 5px;
+    margin-bottom: 5px;
 }
-
+.registerHolder h3.heading {
+    font-size: 2em;
+    margin-bottom: 20px!important;
+}
 .form-register {
     width: 250px;
-    margin: 5px;
+    margin-bottom: 10px;
 }

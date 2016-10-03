@@ -120,18 +120,87 @@ let controllers = {
                 Promise.all([
                     dataService.dashboardLists(id),
                     templates.get('main'),
+                    templates.get('dashboardNav'),
                     templates.get('list')
                 ])
-                .then(([data, mainTemplate, listsTemplate]) => {
+                .then(([data, mainTemplate, dashboardTemplate, listsTemplate]) => {
 
+                    let dashboards = JSON.parse(localStorage.getItem('dashboards'));
                     let mainCompiledTemplate = Handlebars.compile(mainTemplate),
+                        dashboardCompiledTemplate = Handlebars.compile(dashboardTemplate),
                         listsCompiledTemplate = Handlebars.compile(listsTemplate),
                         mainHtml = mainCompiledTemplate(),
-                        listsHtml = listsCompiledTemplate(data.result[0]);
+                        dashboardHtml = dashboardCompiledTemplate(dashboards),
+                        listsHtml = listsCompiledTemplate(data.Result);
 
                     $('#main').html(mainHtml);
+                    $('#dashboardNav').html(dashboardHtml);
                     $('#listsHolder').html(listsHtml);
-                    console.log("List results: ", data);
+
+                    $('a[href*="dashboard/' + id.id + '"]').parent('li').addClass('active');
+                });
+            },
+
+            listPreview(dashboardId, listId) {
+                console.log(arguments);
+                Promise.all([
+                    dataService.list(arguments[0].listId),
+                    templates.get('main'),
+                    templates.get('dashboardNav'),
+                    templates.get('list'),
+                    templates.get('listPreview')
+                ])
+                .then(([data, mainTemplate, dashboardTemplate, listsTemplate, listPreviewTemplate]) => {
+                    let dashboards = JSON.parse(localStorage.getItem('dashboards')),
+                        lists = JSON.parse(localStorage.getItem('lists'));
+
+                    let mainCompiledTemplate = Handlebars.compile(mainTemplate),
+                        dashboardCompiledTemplate = Handlebars.compile(dashboardTemplate),
+                        listsCompiledTemplate = Handlebars.compile(listsTemplate),
+                        listsPreviewCompiledTemplate = Handlebars.compile(listPreviewTemplate),
+
+                        mainHtml = mainCompiledTemplate(),
+                        dashboardHtml = dashboardCompiledTemplate(dashboards),
+                        listsHtml = listsCompiledTemplate(lists),
+                        listPreviewHtml = listsPreviewCompiledTemplate(data.Result);
+
+                    $('#main').html(mainHtml);
+                    $('#dashboardNav').html(dashboardHtml);
+                    $('#listsHolder').html(listsHtml);
+                    $('#listPreview').html(listPreviewHtml);
+
+                    console.log("Tasks: ", data.Result);
+                    $('a[href*="dashboard/' + arguments[0].dashboardId + '"]').parent('li').addClass('active');
+                    $('a[href*="list/' + arguments[0].listId + '"]').parents('li').addClass('active');
+
+                    $('.addNewCheckbox').click((event) => {
+                        event.preventDefault();
+                        let newCheckbox = {},
+                            $checkboxInput = $(event.currentTarget).parents('.checklist').find('.checkboxTitle'),
+                            checkboxTitle = $checkboxInput.val();
+
+                        newCheckbox.title = checkboxTitle;
+                        let checkbox = new CheckBox(newCheckbox);
+
+                        let taskId ={
+                            "id": $checkboxInput.data('taskid')
+                        };
+
+                        dataService
+                            .addCheckbox(checkbox)
+                            .then((response) => {
+                                dataService.updateTask(taskId, response.Id)
+                                    .then(() => {
+                                        console.log("hoho");
+                                        controllersInstance.listPreview({"dashboardId":arguments[0].dashboardId, "listId": arguments[0].listId});
+                                    });
+                            })
+                            .catch(() => {
+                                toastr.error('List not successfully added!');
+                            });
+
+                    });
+
                 });
             }
         }

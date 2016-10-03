@@ -48,7 +48,7 @@ const LENGTHS_OF_STRINGS = {
     MIN_TITLE_LENGTH: 2,
     MAX_TITLE_LENGTH: 20,
     MIN_EXTENDEDITEM_DESCRIPTION_LENGTH: 5,
-    MAX_EXTENDEDITEM_DESCRIPTION_LENGTH: 100,    
+    MAX_EXTENDEDITEM_DESCRIPTION_LENGTH: 100,
     MIN_USERNAME_LENGTH: 3,
     MAX_USERNAME_LENGTH: 15
 }
@@ -63,31 +63,31 @@ const ERROR_MESSAGES = {
 /*classes*/
 
 class Item {
-    constructor(obj) {     
+    constructor(obj) {
         this.title = obj.title;
     }
     get title() {
         return this._title;
     }
     set title(value) {
-        validator.validateStringType(value);
-        validator.validateIfStringIsEmpty(value);
-        validateStringLength(value, LENGTHS_OF_STRINGS.MIN_TITLE_LENGTH, LENGTHS_OF_STRINGS.MAX_TITLE_LENGTH);
+        //validator.validateStringType(value);
+        //validator.validateIfStringIsEmpty(value);
+        //validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_TITLE_LENGTH, LENGTHS_OF_STRINGS.MAX_TITLE_LENGTH);
         this._title = value;
     }
 }
 class ExtendedItem extends Item{
     constructor(obj){
-        super(obj.title);
+        super(obj);
         this.description= obj.description;
     }
     get description() {
         return this._description;
     }
     set description(value) {
-        validator.validateStringType(value);
-        validator.validateIfStringIsEmpty(value);
-        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_EXTENDEDITEM_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_EXTENDEDITEM_DESCRIPTION_LENGTH);
+        //validator.validateStringType(value);
+        //validator.validateIfStringIsEmpty(value);
+        //validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_EXTENDEDITEM_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_EXTENDEDITEM_DESCRIPTION_LENGTH);
         this._description = value;
     }
 }
@@ -96,7 +96,7 @@ var dashBoardIdGenerator = idGenerator();
 
 class DashBoard extends ExtendedItem {
     constructor(obj) {
-        super(obj.title, obj.description);
+        super(obj);
         this.id = dashBoardIdGenerator.next().value;
         this._lists = [];
     }
@@ -116,7 +116,7 @@ class DashBoard extends ExtendedItem {
             lists.splice(index, 1);
         }
         else {
-            throw new Error('There is no list with such id in the dashboard!'); 
+            throw new Error('There is no list with such id in the dashboard!');
         }
 
         return this;
@@ -141,11 +141,11 @@ var listIdGenerator = idGenerator();
 
 class List extends ExtendedItem {
     constructor(obj) {
-        super(obj.title, obj.description);
-        this.id = listIdGenerator.next().value;   
+        super(obj);
+        this.id = listIdGenerator.next().value;
         this._tasks =[];
     }
-  
+
     get tasks() {
         return this._tasks;
     }
@@ -161,7 +161,7 @@ class List extends ExtendedItem {
             tasks.splice(index, 1);
         }
         else {
-            throw new Error('There is no task with such id in the list!'); 
+            throw new Error('There is no task with such id in the list!');
         }
 
         return this;
@@ -184,17 +184,17 @@ var taskIdGenerator = idGenerator();
 
 class Task extends ExtendedItem {
     constructor(obj) {
-        super(obj.title, obj.description)
-        this.id = taskIdGenerator.next().value;      
+        super(obj);
+        this.id = taskIdGenerator.next().value;
         this.deadline = obj.deadline;
         this._checkList = [];
         this.TaskSolvedInPercenteges = 0;
-    }     
+    }
     get deadline() {
         return this._deadline;
     }
     set deadline(value) {
-        this._deadline = deadline;
+        this._deadline = value;
     }
     get checkList() {
         return this._checkList;
@@ -234,14 +234,14 @@ var checkBoxIdGenerator = idGenerator();
 
 class CheckBox extends Item {
     constructor(obj) {
-        super(obj.title);
+        super(obj);
         this.id = checkBoxIdGenerator.next().value;
         this.isComplete = false;
     }
     get isComplete() {
         return this._isComplete;
     }
-    set isComplete(){
+    set isComplete(value){
         //TODO
     }
 }
@@ -250,7 +250,7 @@ var usernameIdGenerator = idGenerator();
 
 class Username {
     constructor(obj) {
-        this.id = usernameIdGenerator.next().value;
+        this._id = usernameIdGenerator.next().value;
         this.username = obj.username;
     }
 

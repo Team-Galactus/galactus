@@ -1,6 +1,6 @@
 /*GENERAL STYLES*/
 body{
-    background: black url(../images/galaxy.jpg) center no-repeat;
+    background: black url(../images/galaxy2.jpg) center no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -8,6 +8,12 @@ body{
     content: "";
     display: block;
     float: none;
+}
+a {
+    color: #020518!important;
+}
+a:hover{
+    text-decoration: none;
 }
 ul{
     padding:0;
@@ -20,6 +26,7 @@ body *{
     font-family:'News Cycle', sans-serif;
 }
 h1, h2, h3, h4, h5, h6,
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
 .heading,
 label{
     font-family:  'Righteous', cursive!important;
@@ -36,11 +43,14 @@ h2, h3, h4{
 .addItemBtn {
     background: none;
     border: none;
-    text-decoration: underline;
     margin: 10px;
     text-align: right;
     display: block;
     cursor:pointer;
+    float: right;
+}
+.hidden {
+    display: none;
 }
 /*GENERAL STYLES END*/
 
@@ -54,7 +64,6 @@ h2, h3, h4{
 /*MAIN STYLES*/
 #main{
     margin-top:55px;
-    height: 100vh;
 }
 .welcomeHolder{
     display: -ms-flexbox;
@@ -82,17 +91,19 @@ h2, h3, h4{
     margin: 55px 0 0 225px;
     padding:20px
 }
-.btn {
-    background: #c6dcf4!important;
-    background: -moz-linear-gradient(top, #c6dcf4 0%, #bbd7f6 42%, #86bbf4 100%)!important;
-    background: -webkit-linear-gradient(top, #c6dcf4 0%,#bbd7f6 42%,#86bbf4 100%)!important;
-    background: linear-gradient(to bottom, #c6dcf4 0%,#bbd7f6 42%,#86bbf4 100%)!important;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6dcf4', endColorstr='#86bbf4',GradientType=0 );
-    color: #060090!important;
-    font-weight: 600;
-    border: none!important;
-}
-.btn:hover{
+/*.btn {*/
+    /*background: #c6dcf4!important;*/
+    /*background: -moz-linear-gradient(top, #c6dcf4 0%, #bbd7f6 42%, #86bbf4 100%)!important;*/
+    /*background: -webkit-linear-gradient(top, #c6dcf4 0%,#bbd7f6 42%,#86bbf4 100%)!important;*/
+    /*background: linear-gradient(to bottom, #c6dcf4 0%,#bbd7f6 42%,#86bbf4 100%)!important;*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6dcf4', endColorstr='#86bbf4',GradientType=0 );*/
+    /*color: #fff!important;*/
+    /*font-weight: 600;*/
+    /*border: none!important;*/
+    /*text-shadow: 1px 0px 1px #aaa9a9;*/
+    /*box-shadow: 1px 1px 6px 1px #c3daf4!important;*/
+/*}*/
+.btn,.btn:hover{
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0cdaff+0,09a2d5+42,0b84e0+100 */
     background: #0cdaff!important; /* Old browsers */
     background: -moz-linear-gradient(top,  #0cdaff 0%, #09a2d5 42%, #0b84e0 100%)!important; /* FF3.6-15 */
@@ -138,6 +149,9 @@ a.navbar-brand {
 #dashboardNav .nav {
     width: 100%;
 }
+#dashboardNav li {
+    float:none;
+}
 #dashboardNav li:hover,
 #dashboardNav li.active
 {
@@ -169,18 +183,22 @@ a.navbar-brand {
 /*DASHBOARD STYLES END*/
 
 /*LIST STYLES*/
-#listPreview {
-    background: rgba(255,255,255,0.55);
+.listPreview {
+    background: rgba(255,255,255,0.9);
     padding: 15px;
     border-radius: 10px;
 }
 .singleList {
     list-style: none;
     width: 100%;
-    background: #e7e7e7;
+    background: rgba(255,255,255,0.9);
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 10px;
+}
+.singleList:hover,
+.singleList.active {
+    background: #0cd8fe;;
 }
 .singleList h3 {
     margin: 0;
@@ -188,12 +206,13 @@ a.navbar-brand {
     font-size: 1.2em;
 }
 .listDescription {
-    border-bottom: 1px solid #bfbfbf;
-    padding-bottom: 15px;
+    /*border-bottom: 1px solid #bfbfbf;*/
+    /*padding-bottom: 15px;*/
 }
 
-#listPreview h3 {
+.listPreview h3 {
     margin: 0;
+    text-transform: uppercase;
 }
 .taskPreview {
     box-shadow: 1px 3px 9px -1px rgba(0, 0, 0, 0.64)!important;
@@ -222,6 +241,12 @@ a.navbar-brand {
 .addCheckTitle {
     margin-bottom: 5px;
 }
+.close.checkClose {
+    background: #0f264e!important;
+    opacity: 1;
+    box-shadow: initial!important;
+    float: left;
+}
 /*TASK STYLES END*/
 
 /*CHECKLIST STYLES*/
@@ -244,9 +269,17 @@ input[type="checkbox"]:checked + label {
 }
 /*CHECKLIST STYLES END*/
 
-.hidden {
-    display: none;
+/*FOOTER STYLES*/
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
+.a2a_default_style {
+    float: right;
+    margin: 20px;
+}
+/*FOOTER STYLES END*/
 
 .form-login {
     width: 250px;
@@ -257,4 +290,3 @@ input[type="checkbox"]:checked + label {
     width: 250px;
     margin: 5px;
 }
-

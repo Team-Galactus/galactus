@@ -1,0 +1,59 @@
+<section class="closed clearfix listPreview">
+    <header>
+        <h3 class="heading">{{title}}</h3>
+        <p class="listDescription">{{description}}</p>
+    </header>
+    <article id="tasksHolder">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {{#each tasks}}
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading{{Id}}">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#task{{Id}}" aria-expanded="true" aria-controls="task{{Id}}">
+                            <h4 class="panel-title">{{title}}</h4>
+                            <div class="deadline">
+                                <span><em>Due Date:  </em></span><strong>{{dateFilter deadline}}</strong>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="task{{Id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{Id}}">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p>{{description}}</p>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="checklists clearfix">
+                                        <div class="checklist">
+                                            <h5>Checklist</h5>
+                                            <form class="checklistForm">
+                                                {{#each checkList}}
+                                                    <div class="singleCheck">
+                                                        <input type="checkbox" value="completed">
+                                                        <label>Checkbox 1 </label>
+                                                    </div>
+                                                {{/each}}
+                                            </form>
+                                            <div class="collapse" id="addCheckboxHolder{{Id}}">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input data-taskId="{{Id}}" class="form-control checkboxTitle addCheckTitle" type="text" placeholder="Add a checkbox">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <button class="btn btn-default addNewCheckbox" role="button">Add</button>
+                                                        <a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckboxHolder{{Id}}" aria-expanded="true" aria-controls="addCheckboxHolder{{Id}}"><span aria-hidden="true">&times;</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn addItemBtn" role="button" data-toggle="collapse" href="#addCheckboxHolder{{Id}}" aria-expanded="false" aria-controls="addCheckboxHolder{{Id}}">+ Add Checkbox</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <a class="addItemBtn btn" data-toggle="modal" data-target="#addTaskModal">+ Add Task</a>
+    </article>
+</section>

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" ng-app="myApp">
+<html xmlns="http://www.w3.org/1999/html">
 
 <head lang="en">
     <meta charset="UTF-8">
@@ -35,9 +35,9 @@
                         <input type="text" id="tb-username" class="form-control" placeholder="Username">
                         <input type="password" id="tb-password" class="form-control" placeholder="Password">
                     </div>
-                    <a href="#/login" id="nav-btn-login" class="btn btn-default">Log in</a>
-                    <a href="#/register" id="nav-btn-register" class="btn btn-default">Register</a>
-                    <a href="#" id="nav-btn-logout" class="hidden btn btn-default">Log out</a>
+                    <a href="#/login" id="nav-btn-login" class="btn">Log in</a>
+                    <a href="#/register" id="nav-btn-register" class="btn">Register</a>
+                    <a href="#" id="nav-btn-logout" class="hidden btn">Log out</a>
                 </form>
             </div>
         </nav>
@@ -45,7 +45,6 @@
     <main id="main">
 
     </main>
-
     <footer>
         <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
             <a class="a2a_dd" href="https://www.addtoany.com/share?linkurl=https%3A%2F%2Fraw.githack.com%2FTeam-Galactus%2Fgalactus%2Fmaster%2Fpublic%2Findex.html%23%2Fhome&amp;linkname="></a>
@@ -159,43 +158,43 @@
                             <div class="col-sm-12">
                                 <textarea id="taskDescription" class="form-control marginBottom20px" placeholder="Type in task description"></textarea>
                             </div>
-                            <div class="col-sm-12">
-                                <div class="checklists clearfix">
-                                    <div class="checklist">
-                                        <h5>Some Checklist</h5>
-                                        <form class="checklistForm">
-                                            <div class="singleCheck">
-                                                <input type="checkbox" value="completed">
-                                                <label>Checkbox 1 </label>
-                                            </div>
-                                        </form>
-                                        <div class="collapse" id="addCheckboxHolder">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <input id="checkboxTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checkbox">
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a id="addNewCheckbox" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder">Add</a>
-                                                    <a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder"><span aria-hidden="true">&times;</span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="false" aria-controls="addCheckboxHolder">+ Add Checkbox</a>
-                                    </div>
-                                    <div class="collapse singleTask" id="addCheckListHolder">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <input id="checkListTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checklist">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a id="addNewChecklist" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder">Add</a>
-                                                <a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder"><span aria-hidden="true">&times;</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="false" aria-controls="addCheckListHolder">+ Add Checklist</a>
-                                </div>
-                            </div>
+                            <!--<div class="col-sm-12">-->
+                                <!--<div class="checklists clearfix">-->
+                                    <!--<div class="checklist">-->
+                                        <!--<h5>Some Checklist</h5>-->
+                                        <!--<form class="checklistForm">-->
+                                            <!--<div class="singleCheck">-->
+                                                <!--<input type="checkbox" value="completed">-->
+                                                <!--<label>Checkbox 1 </label>-->
+                                            <!--</div>-->
+                                        <!--</form>-->
+                                        <!--<div class="collapse" id="addCheckboxHolder">-->
+                                            <!--<div class="row">-->
+                                                <!--<div class="col-sm-12">-->
+                                                    <!--<input id="checkboxTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checkbox">-->
+                                                <!--</div>-->
+                                                <!--<div class="col-sm-3">-->
+                                                    <!--<a id="addNewCheckbox" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder">Add</a>-->
+                                                    <!--<a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder"><span aria-hidden="true">&times;</span></a>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="false" aria-controls="addCheckboxHolder">+ Add Checkbox</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="collapse singleTask" id="addCheckListHolder">-->
+                                        <!--<div class="row">-->
+                                            <!--<div class="col-sm-12">-->
+                                                <!--<input id="checkListTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checklist">-->
+                                            <!--</div>-->
+                                            <!--<div class="col-sm-3">-->
+                                                <!--<a id="addNewChecklist" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder">Add</a>-->
+                                                <!--<a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder"><span aria-hidden="true">&times;</span></a>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="false" aria-controls="addCheckListHolder">+ Add Checklist</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -219,7 +218,6 @@
     <script src="./bower_components/toastr/toastr.min.js"></script>
     <script src="./bower_components/everlive/min/everlive.all.min.js"></script>-->
     <!-- Production Links (CDN) -->
-
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.39/system.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -235,6 +233,7 @@
     <script src="js/dataService.js"></script>
     <script src="js/templates.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/likeButtons.js"></script>
 
     <!--<sсript type="text/javascript">-->

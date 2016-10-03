@@ -22,12 +22,14 @@ function setNavigationElementsVisibility(hide) {
         $('#nav-btn-login').addClass('hidden');
         $('#nav-btn-register').addClass('hidden');
         $('#nav-btn-logout').removeClass('hidden');
+        $('.welcomeHolder a').addClass('hidden');
     } else {
         $("#tb-username").removeClass("hidden");
         $("#tb-password").removeClass("hidden");
         $('#nav-btn-login').removeClass('hidden');
         $('#nav-btn-register').removeClass('hidden');
         $('#nav-btn-logout').addClass('hidden');
+        $('.welcomeHolder a').removeClass('hidden');
     }
 }
 
@@ -41,10 +43,10 @@ router
         "register": controllersInstance.registerUser,
         "dashboard": controllersInstance.dashboard,
         "dashboard/:id": controllersInstance.dashboardLists,
+        "dashboard/:dashboardId/list/:listId": controllersInstance.listPreview,
         "": (() => {
             router.navigate("/home");
         })
-        //"dashboard/:id/lists/:id":
     })
     .resolve(); // Very Important !!!
 
@@ -101,17 +103,64 @@ $(document).ready(() => {
     $('#addList').click((event) => {
         event.preventDefault();
         let newList = {},
-            $listHolder = $('#lists'),
             listTitle = $('#listTitle').val(),
             listDescription = $('#listDescription').val();
 
         newList.title = listTitle;
         newList.description = listDescription;
 
-        $listHolder.append('<li class="singleList">' +
-                '<h3><a href=""> ' + newList.title + '</a></h3>' +
-                '<p class="listDescription">' + newList.description + '</p>' +
-            '</li>');
+        let list = new List(newList);
+        let dashboardId ={
+            "id": window.location.hash.split('/')[2]
+        };
+
+        dataService
+            .addList(list)
+            .then((response) => {
+                dataService.updateDashboard(dashboardId, response.Id)
+                .then(() => {
+                    console.log("hoho");
+                    controllersInstance.dashboardLists(dashboardId);
+                });
+            })
+            .catch(() => {
+                toastr.error('List not successfully added!');
+            });
+
+    });
+
+    //submit event for addList modal
+    $('#addTask').click((event) => {
+        event.preventDefault();
+        let newTask = {},
+            taskTitle = $('#taskTitle').val(),
+            taskDescription = $('#taskDescription').val(),
+            taskDeadline = new Date($('#taskDeadline').val());
+
+        newTask.title = taskTitle;
+        newTask.description = taskDescription;
+        newTask.deadline = taskDeadline.toISOString();
+
+        let task = new Task(newTask);
+        let listId ={
+            "id": window.location.hash.split('/')[4]
+        };
+        let dashboardId ={
+            "id": window.location.hash.split('/')[2]
+        };
+
+        dataService
+            .addTask(task)
+            .then((response) => {
+                dataService.updateList(listId, response.Id)
+                    .then(() => {
+                        console.log("hoho");
+                        controllersInstance.listPreview({"dashboardId":dashboardId, "listId":listId.id});
+                    });
+            })
+            .catch(() => {
+                toastr.error('List not successfully added!');
+            });
     });
 
 });

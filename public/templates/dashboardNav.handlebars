@@ -1,8 +1,8 @@
 <div class="collapse navbar-collapse collapseNav">
     <ul id="dashboardList" class="nav navbar-nav">
         {{#each this}}
-            <li {{#if @first}}class="active"{{/if}}>
-                <a href="#/dashboard/{{id}}">
+            <li>
+                <a href="#/dashboard/{{Id}}">
                     <h2>{{title}}<span class="sr-only">(current)</span></h2>
                     <p class="subTitle">{{description}}</p>
                 </a>
@@ -10,4 +10,4 @@
         {{/each}}
     </ul>
 </div>
-<a class="addItemBtn" data-toggle="modal" data-target="#addDashboardModal">+ Add Dashboard</a>
+<a class="addItemBtn btn" data-toggle="modal" data-target="#addDashboardModal">+ Add Dashboard</a>

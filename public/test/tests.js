@@ -147,7 +147,19 @@ describe('Tests', function () {
 				.then(done, done);
 		});
 	});
+	describe('classes tests', function () {
 
+		let newDashboard = { title: 'user Title', description: 'user descript' }
+		let classes = new DashBoard(newDashboard);
+		beforeEach(function () {
+
+		});
+
+		it('expect class Dashboard correct add new element list', function () {
+			expect('list').to.be.equal(classes.addList('list')._lists[0]);
+		});
+
+	});
 
 });
 

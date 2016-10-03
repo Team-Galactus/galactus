@@ -11,12 +11,12 @@
     <!-- Development -->
     <!--<link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./bower_components/toastr/toastr.css" rel="stylesheet" />-->
+
     <!-- Production Links (CDN) -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=News+Cycle|Righteous" rel="stylesheet">
 </head>
-
 <body>
     <header>
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -56,7 +56,6 @@
         </div>        
     </footer>
 
-    <!--Popups for creating dashboard & list and editing a single task-->
     <!--Add Dashboard Modal-->
     <div id="addDashboardModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -88,11 +87,9 @@
                     </div>
                 </form>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+
     <!--Add List Modal-->
     <div id="addListModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -124,11 +121,9 @@
                     </div>
                 </form>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+
     <!--Add Task Modal-->
     <div id="addTaskModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -158,43 +153,6 @@
                             <div class="col-sm-12">
                                 <textarea id="taskDescription" class="form-control marginBottom20px" placeholder="Type in task description"></textarea>
                             </div>
-                            <!--<div class="col-sm-12">-->
-                                <!--<div class="checklists clearfix">-->
-                                    <!--<div class="checklist">-->
-                                        <!--<h5>Some Checklist</h5>-->
-                                        <!--<form class="checklistForm">-->
-                                            <!--<div class="singleCheck">-->
-                                                <!--<input type="checkbox" value="completed">-->
-                                                <!--<label>Checkbox 1 </label>-->
-                                            <!--</div>-->
-                                        <!--</form>-->
-                                        <!--<div class="collapse" id="addCheckboxHolder">-->
-                                            <!--<div class="row">-->
-                                                <!--<div class="col-sm-12">-->
-                                                    <!--<input id="checkboxTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checkbox">-->
-                                                <!--</div>-->
-                                                <!--<div class="col-sm-3">-->
-                                                    <!--<a id="addNewCheckbox" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder">Add</a>-->
-                                                    <!--<a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="true" aria-controls="addCheckboxHolder"><span aria-hidden="true">&times;</span></a>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckboxHolder" aria-expanded="false" aria-controls="addCheckboxHolder">+ Add Checkbox</a>-->
-                                    <!--</div>-->
-                                    <!--<div class="collapse singleTask" id="addCheckListHolder">-->
-                                        <!--<div class="row">-->
-                                            <!--<div class="col-sm-12">-->
-                                                <!--<input id="checkListTitle" class="form-control addCheckTitle" type="text" placeholder="Add a checklist">-->
-                                            <!--</div>-->
-                                            <!--<div class="col-sm-3">-->
-                                                <!--<a id="addNewChecklist" class="btn btn-default" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder">Add</a>-->
-                                                <!--<a class="btn btn-default close checkClose" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="true" aria-controls="addCheckListHolder"><span aria-hidden="true">&times;</span></a>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<a class="addItemBtn" role="button" data-toggle="collapse" href="#addCheckListHolder" aria-expanded="false" aria-controls="addCheckListHolder">+ Add Checklist</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -203,19 +161,19 @@
                     </div>
                 </form>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+
     <!-- Libs -->
     <script src="js/libs/navigo.min.js"></script>
+
     <!-- Development -->
     <!--<script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/systemjs/dist/system.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./bower_components/handlebars/handlebars.min.js"></script>
     <script src="./bower_components/toastr/toastr.min.js"></script>
+    
     <!-- Production Links (CDN) -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.39/system.js"></script>
@@ -234,9 +192,6 @@
     <script src="js/utils.js"></script>
     <!--<script src="js/likeButtons.js"></script>-->
 
-    <!--<sсript type="text/javascript">-->
-    <!--System.import('app');-->
-    <!--</sсript>-->
     <!-- App: Start -->
     <script src="js/app.js"></script>
 

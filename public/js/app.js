@@ -48,26 +48,26 @@ router
     })
     .resolve(); // Very Important !!!
 
-$("#nav-btn-login").on("click", (ev) => {
-    // The preventDefault() method cancels the event if it is cancelable
-    // For example, this can be useful when:
-    //
-    //    1. Clicking on a "Submit" button, prevent it from submitting a form
-    //    2. Clicking on a link, prevent the link from following the URL
-    ev.preventDefault();
-    controllersInstance
-        .loginUser()
-        .then(setNavigationElementsVisibility);
-});
-
-$('#nav-btn-logout').on('click', (ev) => {
-    ev.preventDefault();
-    controllersInstance
-        .logoutUser()
-        .then(setNavigationElementsVisibility);
-});
-
 $(document).ready(() => {
+
+    $("#nav-btn-login").on("click", (ev) => {
+        // The preventDefault() method cancels the event if it is cancelable
+        // For example, this can be useful when:
+        //
+        //    1. Clicking on a "Submit" button, prevent it from submitting a form
+        //    2. Clicking on a link, prevent the link from following the URL
+        ev.preventDefault();
+        controllersInstance
+            .loginUser()
+            .then(setNavigationElementsVisibility);
+    });
+
+    $('#nav-btn-logout').on('click', (ev) => {
+        ev.preventDefault();
+        controllersInstance
+            .logoutUser()
+            .then(setNavigationElementsVisibility);
+    });
 
     //toggle navigation link active class
     $('#dashboardNav').on('click', "li", (event) => {

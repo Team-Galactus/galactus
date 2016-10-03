@@ -70,6 +70,7 @@ describe('Tests', function () {
 		afterEach(function () {
 			requester.getJSON.restore();
 			requester.postJSON.restore();
+			localStorage.clear();
 		});
 
 		it('expect localStorage to have no username after logout', function (done) {
@@ -94,6 +95,70 @@ describe('Tests', function () {
 				})
 				.then(done, done);
 		});
+	});
+
+	describe('Dashboard tests', function () {
+		const result = {
+			result: []
+		};
+		beforeEach(function () {
+			sinon.stub(requester, 'getJSON')
+				.returns(new Promise((resolve, reject) => {
+					resolve(result);
+				}));
+
+			//response.result["username"] = user.username;
+			//localStorage.setItem("user", JSON.stringify(user.username));
+			sinon.stub(requester, 'postJSON')
+				.returns(new Promise((resolve, reject) => {
+					resolve({
+						result: {
+							username: user.username,
+							authKey: AUTH_KEY
+						}
+					});
+				}));
+		});
+		afterEach(function () {
+			requester.getJSON.restore();
+			requester.postJSON.restore();
+			localStorage.clear();
+		});
+		//console.log(user);
+		it('expect Dashboard to return result when is loged', function (done) {
+			localStorage.setItem("user", JSON.stringify(user.username));
+			dataService.dashboards()
+				.then((f) => {
+					//console.log(f);
+					expect(f).to.be.equal(result);
+				})
+				.then(done, done);
+		});
+
+		it('expect Dashboard return null when is logedOut', function (done) {
+			dataService.logout()
+				.then(() => {
+					return dataService.dashboards();
+				})
+				.then((f) => {
+					//console.log(f);
+					expect(f).to.be.equal(result);
+				})
+				.then(done, done);
+		});
+	});
+	describe('classes tests', function () {
+
+		let newDashboard = { title: 'user Title', description: 'user descript' }
+		let classes = new DashBoard(newDashboard);
+		beforeEach(function () {
+
+		});
+
+		it('expect class Dashboard correct add new element list', function () {
+			expect('list').to.be.equal(classes.addList('list')._lists[0]);
+		});
+
 	});
 
 });

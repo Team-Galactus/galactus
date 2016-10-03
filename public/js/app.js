@@ -1,7 +1,4 @@
 ﻿
-let apiKey = "h2dqg9q03f6uig78";
-let evLive = new Everlive(apiKey);
-
 // toastr configuration
 toastr.options.preventDuplicates = true;
 toastr.options.timeOut = 2500; // How long the toast will display without user interaction
@@ -30,6 +27,7 @@ function setNavigationElementsVisibility(hide) {
         $('#nav-btn-register').removeClass('hidden');
         $('#nav-btn-logout').addClass('hidden');
         $('.welcomeHolder a').removeClass('hidden');
+        $('#btn-dashboards').addClass('hidden');
     }
 }
 

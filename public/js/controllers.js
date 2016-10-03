@@ -94,7 +94,7 @@ let controllers = {
                         $('#main').html(html);
                                 
                         if (isLoggedIn) {
-                            $('#btn-dasboards').removeClass('hidden');
+                            $('#btn-dashboards').removeClass('hidden');
                         }
                     });
             },

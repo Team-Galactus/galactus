@@ -1,6 +1,5 @@
 ﻿
 var appID = "r6hpe5hoscwytyr2";
-var everliveApp = new Everlive(appID);
 
 var dataService = {
     isLoggedIn() {

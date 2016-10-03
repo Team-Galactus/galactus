@@ -70,9 +70,9 @@ class Item {
         return this._title;
     }
     set title(value) {
-        //validator.validateStringType(value);
-        //validator.validateIfStringIsEmpty(value);
-        //validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_TITLE_LENGTH, LENGTHS_OF_STRINGS.MAX_TITLE_LENGTH);
+        validator.validateStringType(value);
+        validator.validateIfStringIsEmpty(value);
+        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_TITLE_LENGTH, LENGTHS_OF_STRINGS.MAX_TITLE_LENGTH);
         this._title = value;
     }
 }
@@ -85,9 +85,9 @@ class ExtendedItem extends Item{
         return this._description;
     }
     set description(value) {
-        //validator.validateStringType(value);
-        //validator.validateIfStringIsEmpty(value);
-        //validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_EXTENDEDITEM_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_EXTENDEDITEM_DESCRIPTION_LENGTH);
+        validator.validateStringType(value);
+        validator.validateIfStringIsEmpty(value);
+        validator.validateStringLength(value, LENGTHS_OF_STRINGS.MIN_EXTENDEDITEM_DESCRIPTION_LENGTH, LENGTHS_OF_STRINGS.MAX_EXTENDEDITEM_DESCRIPTION_LENGTH);
         this._description = value;
     }
 }

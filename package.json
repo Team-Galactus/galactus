@@ -6,10 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Team-Galactus/galactus.git"
-  },
   "author": "Angelina <angelina@quikfox.com>",
   "license": "ISC",
   "ignore": [
@@ -24,5 +20,20 @@
   },
   "homepage": "https://github.com/Team-Galactus/galactus#readme",
   "dependencies": {
-  }
+  },
+  "devDependencies": {
+    "eslint": "3.10.2"
+  },
+  "engines": {
+    "node": "6.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Team-Galactus/galactus"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }
